@@ -12,7 +12,7 @@ public class Property {
     private int propertyId;
     //The full address of a property
     private String address;
-    //The number of bedroom a property has
+    //The number of bedrooms a property has
     private int numberOfBedrooms;
     //The size of the property
     private double size;
