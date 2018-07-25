@@ -4,14 +4,12 @@ import fit5042.tutex.repository.entities.Property;
 import java.util.List;
 
 /**
- * The interface defines the common behaviours across all property repository implementation
- * 
- * @autor thinking
+ * @autor Eddie Leung
  */
 public interface PropertyRepository {
 
     /**
-     * Add the property being passed as parameter into the repository
+     * Add the property being passed as parameter into the database
      *
      * @param property - the property to add
      */
@@ -26,9 +24,9 @@ public interface PropertyRepository {
     public Property searchPropertyById(int id) throws Exception;
 
     /**
-     * Return all the properties in the repository
+     * Return all the properties in the database
      *
-     * @return all the properties in the repository
+     * @return all the properties in the database
      */
     public List<Property> getAllProperties() throws Exception;
 }

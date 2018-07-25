@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 /**
  * Driver class
  * 
- * @author Eddie
+ * @author thinking
  */
 public class RealEstateAgency {
     
@@ -26,6 +26,13 @@ public class RealEstateAgency {
     public RealEstateAgency(String name) throws Exception {
         this.name = name;
         this.propertyRepository = PropertyRepositoryFactory.getInstance();
+    }
+    public void addProperty(Property property) {
+        try {
+            this.propertyRepository.addProperty(property);
+        } catch (Exception ex) {
+            System.out.println("Failed to add property: " + ex.getMessage());
+        }
     }
     
     public void createProperties() {
@@ -81,14 +88,6 @@ public class RealEstateAgency {
 
     public void setName(String name) {
         this.name = name;
-    }
-    
-    public static void main(String[] args) {
-        try {
-            new RealEstateAgency("Monash Real Estate Agency").run();
-        } catch (Exception ex) {
-            System.out.println("Failed to run application: " + ex.getMessage());
-        }
     }
     
 }

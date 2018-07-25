@@ -7,13 +7,13 @@ import java.util.List;
 /**
  * A simple repository implementation that uses ArrayList as the data storage
  * 
- * @author thinking
+ * @author Eddie Leung
  */
 public class SimplePropertyRepositoryImpl implements PropertyRepository {
     
     private final List<Property> properties;
 
-    public SimplePropertyRepositoryImpl()
+    protected SimplePropertyRepositoryImpl()
     {
         properties = new ArrayList<>();
     }

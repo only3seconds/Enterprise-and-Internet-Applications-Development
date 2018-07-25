@@ -4,7 +4,7 @@ import java.text.NumberFormat;
 
 /**
  *
- * @author thinking
+ * @author Eddie Leung
  */
 public class Property {
 
@@ -12,7 +12,7 @@ public class Property {
     private int propertyId;
     //The full address of a property
     private String address;
-    //The number of bedrooms a property has
+    //The number of bedroom a property has
     private int numberOfBedrooms;
     //The size of the property
     private double size;
@@ -143,7 +143,6 @@ public class Property {
      */
     @Override
     public String toString() {
-        //NumberFormat.getCurrencyInstance().format(price) 货币格式化输出
         return propertyId + " " + address + " " + numberOfBedrooms + "BR(s) " + size + "sqm " + NumberFormat.getCurrencyInstance().format(price);
     }
 }

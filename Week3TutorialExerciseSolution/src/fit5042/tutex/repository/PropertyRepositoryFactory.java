@@ -1,3 +1,9 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 package fit5042.tutex.repository;
 
 import java.io.File;
@@ -8,24 +14,18 @@ import java.util.Properties;
 /**
  * The class is responsible for creating property repository
  * 
- * @author thinking
+ * @author Eddie Leung
  */
 public class PropertyRepositoryFactory {
-    
     private static final PropertyRepository REPOSITORY_INSTANCE = createInstance();
     
-    /**
-     * Create a property repository object based on the setting 'repository.implementation.use' in the XML file 'repository-settings.properties'
-     *
-     * @return the property repository object created
-     */
     private static PropertyRepository createInstance()
     {
         try{
             
-            Properties repositoryProperties = new Properties();
-            repositoryProperties.loadFromXML(new FileInputStream(new File("repository-settings.properties")));
-            return (PropertyRepository)Class.forName(repositoryProperties.getProperty("repository.implementation.use")).newInstance();         
+            Properties repositoryProperty = new Properties();
+            repositoryProperty.loadFromXML(new FileInputStream(new File("repository-settings.properties")));
+            return (PropertyRepository)Class.forName(repositoryProperty.getProperty("repository.implementation.use")).newInstance();         
         }
         catch (IOException | ClassNotFoundException | IllegalAccessException | InstantiationException ex)
         {
@@ -35,11 +35,6 @@ public class PropertyRepositoryFactory {
         return null;
     }
     
-    /**
-     * Return the class member REPOSITORY_INSTANCE
-     *
-     * @return the class member REPOSITORY_INSTANCE
-     */
     public static PropertyRepository getInstance() throws Exception
     {
         if (REPOSITORY_INSTANCE != null)
