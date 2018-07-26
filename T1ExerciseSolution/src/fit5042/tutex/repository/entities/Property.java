@@ -1,12 +1,22 @@
 package fit5042.tutex.repository.entities;
 
+import java.io.Serializable;
 import java.text.NumberFormat;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author thinking
  */
-public class Property {
+@Entity
+@NamedQueries({@NamedQuery(name = Property.FIND_ALL, query = "SELECT p FROM Property p")})
+public class Property implements Serializable {
+    
+    public static final String FIND_ALL =  "Property.getAllProperties";
 
     //A number that is used to uniquely identify a property
     private int propertyId;
@@ -59,8 +69,11 @@ public class Property {
     }
 
     /**
+     * 与数据库表中的 PROPERTY_ID 相对应
      * @return the value of attribute propertyId
      */
+    @Id
+    @Column(name = "property_id")
     public int getPropertyId() {
         return propertyId;
     }
@@ -77,6 +90,7 @@ public class Property {
     /**
      * @return the value of attribute address
      */
+    @Column(name = "address")
     public String getAddress() {
         return address;
     }
@@ -93,6 +107,7 @@ public class Property {
     /**
      * @return the value of attribute numberOfBedrooms
      */
+    @Column(name = "bedrooms_number")
     public int getNumberOfBedrooms() {
         return numberOfBedrooms;
     }
@@ -109,6 +124,7 @@ public class Property {
     /**
      * @return the value of attribute size
      */
+    @Column(name = "size")
     public double getSize() {
         return size;
     }
@@ -125,6 +141,7 @@ public class Property {
     /**
      * @return the value of attribute price
      */
+    @Column(name = "education_level")
     public double getPrice() {
         return price;
     }

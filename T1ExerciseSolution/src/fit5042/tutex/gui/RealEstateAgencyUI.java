@@ -5,11 +5,12 @@
  */
 package fit5042.tutex.gui;
 
-import fit5042.tutex.repository.SimplePropertyRepositoryImpl;
+import fit5042.tutex.repository.JPAPropertyRepositoryImpl;
 import fit5042.tutex.repository.entities.Property;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -38,22 +39,26 @@ public class RealEstateAgencyUI extends javax.swing.JDialog {
         jList1 = new javax.swing.JList<>();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        idTextField = new javax.swing.JTextField();
+        addressTextField = new javax.swing.JTextField();
+        bedroomNoTextField = new javax.swing.JTextField();
+        sizeTextField = new javax.swing.JTextField();
+        priceTextField = new javax.swing.JTextField();
+        addButton = new javax.swing.JButton();
+        searchButton = new javax.swing.JButton();
+        viewButton = new javax.swing.JButton();
+        closeButton = new javax.swing.JButton();
+        updateButton = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        propertyTable = new javax.swing.JTable();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -65,6 +70,19 @@ public class RealEstateAgencyUI extends javax.swing.JDialog {
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane3.setViewportView(jTextArea1);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -78,43 +96,76 @@ public class RealEstateAgencyUI extends javax.swing.JDialog {
 
         jLabel5.setText("Price:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        idTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                idTextFieldActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Add");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        addButton.setText("Add");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Search");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        searchButton.setText("Search");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                searchButtonActionPerformed(evt);
             }
         });
 
-        jButton3.setText("View");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        viewButton.setText("View");
+        viewButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                viewButtonActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Close");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        closeButton.setText("Close");
+        closeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                closeButtonActionPerformed(evt);
             }
         });
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
+        updateButton.setText("Update");
+        updateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateButtonActionPerformed(evt);
+            }
+        });
+
+        deleteButton.setText("Delete");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
+
+        propertyTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Address", "No.Of Bedrooms", "Size", "Price"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        propertyTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                propertyTableMouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(propertyTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -123,22 +174,12 @@ public class RealEstateAgencyUI extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(64, 64, 64)
-                                .addComponent(jButton2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
-                                .addComponent(jButton3)
-                                .addGap(78, 78, 78)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
@@ -146,16 +187,28 @@ public class RealEstateAgencyUI extends javax.swing.JDialog {
                                     .addComponent(jLabel5))
                                 .addGap(79, 79, 79)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField1)
-                                    .addComponent(jTextField5)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jTextField3)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING))))
-                        .addContainerGap())))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(jScrollPane2)
-                .addContainerGap())
+                                    .addComponent(idTextField)
+                                    .addComponent(priceTextField)
+                                    .addComponent(addressTextField, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(bedroomNoTextField)
+                                    .addComponent(sizeTextField, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(58, 58, 58)
+                        .addComponent(updateButton)
+                        .addGap(75, 75, 75)
+                        .addComponent(deleteButton)
+                        .addGap(89, 89, 89)
+                        .addComponent(searchButton)
+                        .addGap(72, 72, 72)
+                        .addComponent(viewButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                        .addComponent(closeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,107 +216,172 @@ public class RealEstateAgencyUI extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(addressTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(bedroomNoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(sizeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1)
-                        .addComponent(jButton2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton3)))
+                    .addComponent(priceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addButton)
+                    .addComponent(updateButton)
+                    .addComponent(deleteButton)
+                    .addComponent(searchButton)
+                    .addComponent(viewButton)
+                    .addComponent(closeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    SimplePropertyRepositoryImpl simpleImpl = new SimplePropertyRepositoryImpl();
+    JPAPropertyRepositoryImpl simpleImpl = new JPAPropertyRepositoryImpl();
     
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void idTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_idTextFieldActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
-        int propertyId = Integer.parseInt(jTextField1.getText());
+        clearPropertyTable();
+        
+        int propertyId = Integer.parseInt(idTextField.getText());
         try {
             if(simpleImpl.searchPropertyById(propertyId) == null) {
                 JOptionPane.showMessageDialog(this, "This id is not found", "Alert", JOptionPane.WARNING_MESSAGE);
     
             } else {
-                jTextArea2.setText(simpleImpl.searchPropertyById(propertyId).toString());
-                jTextField1.setText("");
+                Property p = simpleImpl.searchPropertyById(propertyId);
+                displayProperty(p);    
             }
             
-            
+            idTextField.setText("");
+              
         } catch (Exception ex) {
             Logger.getLogger(RealEstateAgencyUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_searchButtonActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
         // TODO add your handling code here:
         System.exit(0);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_closeButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        int propertyId = Integer.parseInt(jTextField1.getText());
-        String address = jTextField2.getText();
-        int numberOfBedrooms = Integer.parseInt(jTextField3.getText());
-        double size = Double.parseDouble(jTextField4.getText());
-        double price = Double.parseDouble(jTextField5.getText());
+
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         
+        // 得到所有 TextField 的输入
+        int propertyId = Integer.parseInt(idTextField.getText());
+        String address = addressTextField.getText();
+        int numberOfBedrooms = Integer.parseInt(bedroomNoTextField.getText());
+        double size = Double.parseDouble(sizeTextField.getText());
+        double price = Double.parseDouble(priceTextField.getText());
+        
+        // 用得到的参数构建一个 property
         Property p = new Property(propertyId, address, numberOfBedrooms, size, price);
+        
         try {
+            // 添加一个 property
             simpleImpl.addProperty(p);
-
-            jTextArea2.append(p.toString() + "\n");
-            jTextField1.setText("");
-            jTextField2.setText("");
-            jTextField3.setText("");
-            jTextField4.setText("");
-            jTextField5.setText("");
+            // 显示在 propertyTable 上
+            ((DefaultTableModel)propertyTable.getModel()).addRow(new Object[]{p.getPropertyId(), p.getAddress(), p.getNumberOfBedrooms(), p.getSize(), p.getPrice()});
+            
+            clearTextField();
             
         } catch (Exception ex) {
             Logger.getLogger(RealEstateAgencyUI.class.getName()).log(Level.SEVERE, null, ex);
         }   
         
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_addButtonActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void viewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewButtonActionPerformed
         try {
-            jTextArea2.setText("");
+            clearPropertyTable();
+            displayAllProperties();
+            clearTextField();
+        } catch (Exception ex) {
+            Logger.getLogger(RealEstateAgencyUI.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }//GEN-LAST:event_viewButtonActionPerformed
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        try {
             // TODO add your handling code here:
-            for(Property p: simpleImpl.getAllProperties()) {
-                jTextArea2.append(p.toString() + "\n");
-            }
+            int selectedRowIndex = propertyTable.getSelectedRow();
+            String propertyId = propertyTable.getValueAt(selectedRowIndex, 0).toString();
+            int selectedId = Integer.parseInt(propertyId);
+            simpleImpl.removeProperty(selectedId);
+            
+            clearPropertyTable();
+            displayAllProperties();
+            clearTextField();
+            
         } catch (Exception ex) {
             Logger.getLogger(RealEstateAgencyUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+        
+        try {
+            
+            int newId = Integer.parseInt(idTextField.getText());
+            String newAddress = addressTextField.getText();
+            int newNumberOfBedrooms = Integer.parseInt(bedroomNoTextField.getText());
+            double newSize = Double.parseDouble(sizeTextField.getText());
+            double newPrice = Double.parseDouble(priceTextField.getText());
+            
+            Property p = new Property(newId, newAddress, newNumberOfBedrooms, newSize, newPrice);
+            
+            simpleImpl.editProperty(p);
+            
+            // 显示
+            clearPropertyTable();
+            displayAllProperties();     
+            clearTextField();
+                 
+        } catch (Exception ex) {
+            Logger.getLogger(RealEstateAgencyUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   
+    }//GEN-LAST:event_updateButtonActionPerformed
+
+    private void propertyTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_propertyTableMouseClicked
+        // TODO add your handling code here:
+        int selectedRowIndex = propertyTable.getSelectedRow();
+        
+        String propertyId = propertyTable.getValueAt(selectedRowIndex, 0).toString();
+        int selectedId = Integer.parseInt(propertyId); 
+        
+        try {
+            Property p = simpleImpl.searchPropertyById(selectedId);
+            idTextField.setText(String.valueOf(p.getPropertyId()));
+            addressTextField.setText(String.valueOf(p.getAddress()));
+            bedroomNoTextField.setText(String.valueOf(p.getNumberOfBedrooms()));
+            sizeTextField.setText(String.valueOf(p.getSize()));
+            priceTextField.setText(String.valueOf(p.getPrice()));
+            
+        } catch (Exception ex) {
+            Logger.getLogger(RealEstateAgencyUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_propertyTableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -306,12 +424,51 @@ public class RealEstateAgencyUI extends javax.swing.JDialog {
             }
         });
     }
+    
+    
+    // 显示一个property
+    private void displayProperty(Property p) {
+        ((DefaultTableModel)propertyTable.getModel()).addRow(new Object[]{p.getPropertyId(), p.getAddress(), p.getNumberOfBedrooms(), p.getSize(), p.getPrice()});
+        
+    }
+    
+    // 显示数据库表 Property 中所有的内容
+    private void displayAllProperties() throws Exception {
+        for(Property pro: simpleImpl.getAllProperties()) {
+                ((DefaultTableModel)propertyTable.getModel()).addRow(new Object[]{pro.getPropertyId(), pro.getAddress(), pro.getNumberOfBedrooms(), pro.getSize(), pro.getPrice()});
+            }
+        
+    }
+    
+    // 清除 TextField
+    private void clearTextField() {
+            idTextField.setText("");
+            addressTextField.setText("");
+            bedroomNoTextField.setText("");
+            sizeTextField.setText("");
+            priceTextField.setText("");   
+    }
+    
+    // 清除 propertyTable
+    private void clearPropertyTable() {     
+        int numberOfRow = propertyTable.getModel().getRowCount();
+        
+        if (numberOfRow > 0) {
+            DefaultTableModel tableModel = (DefaultTableModel) this.propertyTable.getModel();
+            for (int index = (numberOfRow - 1); index >= 0; index --) {
+                tableModel.removeRow(index);
+            }            
+        }
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton addButton;
+    private javax.swing.JTextField addressTextField;
+    private javax.swing.JTextField bedroomNoTextField;
+    private javax.swing.JButton closeButton;
+    private javax.swing.JButton deleteButton;
+    private javax.swing.JTextField idTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -319,14 +476,16 @@ public class RealEstateAgencyUI extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField priceTextField;
+    private javax.swing.JTable propertyTable;
+    private javax.swing.JButton searchButton;
+    private javax.swing.JTextField sizeTextField;
+    private javax.swing.JButton updateButton;
+    private javax.swing.JButton viewButton;
     // End of variables declaration//GEN-END:variables
 }
