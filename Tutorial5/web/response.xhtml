@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE	html>		
+<html xmlns="http://www.w3.org/1999/xhtml"	
+xmlns:h="http://xmlns.jcp.org/jsf/html">		
+<h:head>	
+<title> Lab5	- Response</title>		
+<h:outputStylesheet	name="css/style.css" />		
+</h:head>
+    
+<h:body>		
+<header>		
+<h1>Response	from	server</h1>		
+</header>		
+<article>		
+<h2>Hello	<h:outputText value="#{personBean.name}" />!</h2>		
+<hr	/>		
+<p>You	are	<h:outputText value="#{personBean.age}" /> years	old.</p>		
+<p>Your	message	was	&quot;<h:outputText	value="#{personBean.message}" />&quot;</p>	
+<hr	/>		
+<p>That	was	fun!	Let's	try	that	<h:link outcome="index"	value="again"	/>.</p>		
+</article>		
+<footer>		
+<p>This	project	created	by	NAME	GOES	HERE</p>		
+</footer>		
+</h:body>		
+</html>
+

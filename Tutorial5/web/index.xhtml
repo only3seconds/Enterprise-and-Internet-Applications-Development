@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE	html>		
+<html	xmlns="http://www.w3.org/1999/xhtml"	
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+<h:head>
+    <h:outputStylesheet name="css/style.css"/>
+<title> Lab5	- Home</title>	
+</h:head>
+    
+<h:body>		
+<!-- Start	Header	-->		
+<header>		
+<h1>Introduction	to	JavaServer	Faces</h1>		
+</header>		
+<!-- End	Header	-->		
+<!-- Start	Article	-->		
+<article>		
+<h2>Enter	your	details</h2>		
+<p>Tell	us	a	bit	about	yourself!</p>		
+<hr	/>		
+<!-- Form	-->		
+<!-- End	Form	-->
+<h:form>
+<!-- Name	input	-->		
+<p>Your	name:	<h:message for="personName"	styleClass="error" /></p>		
+<h:inputText	id="personName"	label="Name"	size="32"	value="#{personBean.name}" required="true"	
+requiredMessage="You	must	enter	a	name!"></h:inputText>	
+<!-- Age	input	-->		
+<p>Your	age:	<h:message for="personAge"	styleClass="error"/></p>		
+<h:inputText	id="personAge"	label="Age"	size="2"	maxlength="2"	value="#{personBean.age}"
+required="true"	requiredMessage="You	must	enter	your	age!">		
+<f:validateLongRange minimum="18"	maximum="100"	/>		
+</h:inputText>	
+<!-- Message	input	-->		
+<p>Write	a	message:	<h:message for="personMessage"	styleClass="error"/></p>		
+<h:inputTextarea id="personMessage"	label="Message"	value="#{personBean.message}" required="true"	
+requiredMessage="You	must	enter	a	message!"	/>	
+<!-- Form	submit	button	-->		
+<h:commandButton id="submit"	value="Submit"	action="response"	/>		
+</h:form>
+</article>		
+<!-- End	Article	-->		
+<!-- Start	Footer	-->		
+<footer>		
+<p>This	project	created	by	NAME	GOES	HERE</p>		
+</footer>		
+<!-- End	Footer	-->		
+</h:body>
+    
+    
+</html>
+
