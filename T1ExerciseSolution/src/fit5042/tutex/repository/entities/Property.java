@@ -141,7 +141,7 @@ public class Property implements Serializable {
     /**
      * @return the value of attribute price
      */
-    @Column(name = "education_level")
+    @Column(name = "price")
     public double getPrice() {
         return price;
     }
