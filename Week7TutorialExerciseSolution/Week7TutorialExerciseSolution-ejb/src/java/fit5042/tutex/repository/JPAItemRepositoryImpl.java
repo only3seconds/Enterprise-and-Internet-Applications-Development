@@ -49,7 +49,7 @@ public class JPAItemRepositoryImpl implements ItemRepository{
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery query = builder.createQuery(Item.class);
         Root<Item> p = query.from(Item.class);
-        query.select(p).where(builder.lessThanOrEqualTo(p.get("per_price").as(Double.class), price));
+        query.select(p).where(builder.lessThanOrEqualTo(p.get("perPrice").as(Double.class), price));
         
         return entityManager.createQuery(query).getResultList();
     }
