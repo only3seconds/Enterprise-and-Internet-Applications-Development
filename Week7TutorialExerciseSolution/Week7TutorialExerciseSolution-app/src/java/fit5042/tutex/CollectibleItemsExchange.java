@@ -78,7 +78,7 @@ public class CollectibleItemsExchange implements ActionListener, ListSelectionLi
             if (items != null && !items.isEmpty()) {
                 this.gui.displayItemDetails(items);
             } else {
-                this.gui.displayMessageInDialog("No matched properties found");
+                this.gui.displayMessageInDialog("No matched Budget found");
                 this.gui.clearItemTable();
             }  
         } catch (Exception ex) {
@@ -99,7 +99,7 @@ public class CollectibleItemsExchange implements ActionListener, ListSelectionLi
             if (item != null) {
                 this.gui.displayItemDetails(item);
             } else {
-                this.gui.displayMessageInDialog("No matched properties found");
+                this.gui.displayMessageInDialog("No matched Title found");
                 this.gui.clearItemTable();
             }  
         } catch (Exception ex) {
@@ -120,10 +120,11 @@ public class CollectibleItemsExchange implements ActionListener, ListSelectionLi
             if (itemList != null) {
                 this.gui.displayItemDetails(itemList);
             } else {
-                this.gui.displayMessageInDialog("No matched properties found");
+                this.gui.displayMessageInDialog("No matched Type found");
                 this.gui.clearItemTable();
             }  
         } catch (Exception ex) {
+            ex.printStackTrace();
             this.gui.displayMessageInDialog("Failed to search item by type: " + ex.getMessage());
             this.gui.clearItemTable();
         } finally {

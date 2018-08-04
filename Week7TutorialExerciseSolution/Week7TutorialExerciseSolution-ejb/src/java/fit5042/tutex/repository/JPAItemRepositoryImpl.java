@@ -39,7 +39,7 @@ public class JPAItemRepositoryImpl implements ItemRepository{
         Set<String> labelList = new HashSet<>();
         labelList.add(type);
         List<Item> itemList = entityManager.createNamedQuery(Item.SEARCH_BY_LABEL, Item.class)
-                .setParameter("label", labelList).getResultList();
+                .setParameter("labels", labelList).getResultList();
         
         return itemList;
     }

@@ -202,7 +202,10 @@ public class RealEstateAgency implements ActionListener, ListSelectionListener {
     private void displayAllProperties() {
         try {
             List<Property> properties = propertyRepository.getAllProperties();
-            
+            System.out.println("1:"+properties.get(0).getTags());
+            System.out.println("2:"+properties.get(1).getTags());
+            System.out.println("3:"+properties.get(2).getTags());
+            System.out.println("4:"+properties.get(3).getTags());
             if (properties != null) {
                 this.gui.displayPropertyDetails(properties);
             }

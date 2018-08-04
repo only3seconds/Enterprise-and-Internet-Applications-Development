@@ -17,9 +17,9 @@ import javax.persistence.NamedQuery;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name = Item.GET_ALL_QUERY_NAME, query = "SELECT i FROM Item i"),
-    @NamedQuery(name = Item.FIND_BY_TITLE, query = "SELECT i FROM Item i where i.title = :title"),
-    @NamedQuery(name = Item.SEARCH_BY_LABEL, query = "SELECT i FROM Item i where i.labels = :labels")
+    @NamedQuery(name = Item.GET_ALL_QUERY_NAME, query = "SELECT DISTINCT i FROM Item i left join fetch i.labels"),
+    @NamedQuery(name = Item.FIND_BY_TITLE, query = "SELECT DISTINCT i FROM Item i where i.title = :title"),
+    @NamedQuery(name = Item.SEARCH_BY_LABEL, query = "SELECT DISTINCT i FROM Item i LEFT JOIN FETCH i.labels where i.labels = :labels")
 })
 public class Item implements Serializable {
     
