@@ -16,10 +16,16 @@ import javax.persistence.NamedQuery;
  * @author Eddie
  */
 @Entity
-@NamedQueries({@NamedQuery(name = Item.GET_ALL_QUERY_NAME, query = "SELECT i FROM Item i")})
+@NamedQueries({
+    @NamedQuery(name = Item.GET_ALL_QUERY_NAME, query = "SELECT i FROM Item i"),
+    @NamedQuery(name = Item.FIND_BY_TITLE, query = "SELECT i FROM Item i where i.title = :title"),
+    @NamedQuery(name = Item.SEARCH_BY_LABEL, query = "SELECT i FROM Item i where i.labels = :labels")
+})
 public class Item implements Serializable {
     
     public static final String GET_ALL_QUERY_NAME = "Item.getAll";
+    public static final String FIND_BY_TITLE = "Item.findByTitle";
+    public static final String SEARCH_BY_LABEL = "Item.searchByLabel";
     
     private int itemId; 
     private String title;
@@ -32,6 +38,14 @@ public class Item implements Serializable {
 
     public Item() {
         this.labels = new HashSet<>();
+    }
+    
+    public Item(int itemId, String title, int numberInStore, double perPrice, Set<String> labels) {
+        this.itemId = itemId;
+        this.title = title;
+        this.numberInStore = numberInStore;
+        this.perPrice = perPrice;
+        this.labels = labels;
     }
 
     public Item(int itemId, String title, String imageURL, int numberInStore, int totalNumberInCirculation, double perPrice, Set<String> labels) {
