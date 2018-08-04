@@ -87,7 +87,6 @@ public class CollectibleItemsExchangeGUIImpl extends JFrame implements Collectib
         itemTableColumnModel.getColumn(2).setPreferredWidth(100);
         itemTableColumnModel.getColumn(3).setPreferredWidth(100);
         itemTableColumnModel.getColumn(4).setPreferredWidth(100);
-        itemTableColumnModel.getColumn(5).setPreferredWidth(100);
         
         // create panels
         this.inputPanel = new JPanel();

@@ -234,25 +234,25 @@ public class RealEstateAgency implements ActionListener, ListSelectionListener {
         this.name = name;
     }
 
-    public static void main(String[] args) {
-        try {
-            final RealEstateAgency agency = new RealEstateAgency("Monash Real Estate Agency");
-            //JDK 1.7
-//            SwingUtilities.invokeLater(new Runnable() {
-//                @Override
-//                public void run() {
-//                    agency.initView();
-//                }
-//            });
-            agency.initView();
-            
-//            //JDK 1.8
-//            SwingUtilities.invokeLater(()-> {
-//                agency.initView();
-//            });
-        } catch (Exception ex) {
-            System.out.println("Failed to run application: " + ex.getMessage());
-        }
-    }
+//    public static void main(String[] args) {
+//        try {
+//            final RealEstateAgency agency = new RealEstateAgency("Monash Real Estate Agency");
+//            //JDK 1.7
+////            SwingUtilities.invokeLater(new Runnable() {
+////                @Override
+////                public void run() {
+////                    agency.initView();
+////                }
+////            });
+//            agency.initView();
+//            
+////            //JDK 1.8
+////            SwingUtilities.invokeLater(()-> {
+////                agency.initView();
+////            });
+//        } catch (Exception ex) {
+//            System.out.println("Failed to run application: " + ex.getMessage());
+//        }
+//    }
 
 }
