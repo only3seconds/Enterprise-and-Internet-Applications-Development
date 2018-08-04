@@ -8,11 +8,11 @@
             <web-module-libraries/>
             <web-module-additional-libraries>
                 <library>
-                    <file>${reference.Week8TutorialExercise-ejb.dist-ear}</file>
+                    <file>${reference.Week8TutorialExercise-app.j2ee-module-car}</file>
                     <path-in-war>/</path-in-war>
                 </library>
                 <library>
-                    <file>${reference.Week8TutorialExercise-app.j2ee-module-car}</file>
+                    <file>${reference.Week8TutorialExercise-ejb.dist-ear}</file>
                     <path-in-war>/</path-in-war>
                 </library>
                 <library>
