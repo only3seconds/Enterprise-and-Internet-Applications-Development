@@ -52,20 +52,19 @@ public class CollectibleItemsExchange implements ActionListener, ListSelectionLi
     
     public void searchItem() {
         
-        int id = this.gui.getItemId();
         //TODO
-        String title = "";
-        if (id > 0) {
+        String title = this.gui.getItemTitle();
+        String type = this.gui.getItemType();
+        Double price = this.gui.getBudget();
+        if(null != title && !title.isEmpty()) {
             this.searchItemByTitle(title);
+        } else if(null != type && !type.isEmpty()) {
+            this.searchItemByType(type);
+        } else if(price > 0) {
+            this.searchItemByBudget(price);
         } else {
-            double budget = this.gui.getBudget();
-//            
-//            if (budget > 0) {
-//                this.searchPropertyByBudget(budget);
-//            } else {               
-//                ContactPerson contactPerson = this.gui.getSelectedContactPerson();
-//                this.searchPropertyByContactPerson(contactPerson);
-//            }
+            this.gui.displayMessageInDialog("We need parameter");
+            this.gui.clearItemTable();
         }
     }
     
@@ -83,7 +82,8 @@ public class CollectibleItemsExchange implements ActionListener, ListSelectionLi
                 this.gui.clearItemTable();
             }  
         } catch (Exception ex) {
-            this.gui.displayMessageInDialog("Failed to search property by ID: " + ex.getMessage());
+            ex.printStackTrace();
+            this.gui.displayMessageInDialog("Failed to search property by Budget: " + ex.getMessage());
             this.gui.clearItemTable();
         } finally {
             this.gui.clearInput();
@@ -103,13 +103,34 @@ public class CollectibleItemsExchange implements ActionListener, ListSelectionLi
                 this.gui.clearItemTable();
             }  
         } catch (Exception ex) {
-            this.gui.displayMessageInDialog("Failed to search property by ID: " + ex.getMessage());
+            this.gui.displayMessageInDialog("Failed to search item by Title: " + ex.getMessage());
             this.gui.clearItemTable();
         } finally {
             this.gui.clearInput();
         }
     }
-
+    
+    
+    public void searchItemByType(String type) {
+        
+        try {
+            
+            List<Item> itemList = itemRepository.searchItemByType(type);
+            
+            if (itemList != null) {
+                this.gui.displayItemDetails(itemList);
+            } else {
+                this.gui.displayMessageInDialog("No matched properties found");
+                this.gui.clearItemTable();
+            }  
+        } catch (Exception ex) {
+            this.gui.displayMessageInDialog("Failed to search item by type: " + ex.getMessage());
+            this.gui.clearItemTable();
+        } finally {
+            this.gui.clearInput();
+        }
+    }
+    
 
     private void displayAllItems() {
         try {
@@ -139,8 +160,8 @@ public class CollectibleItemsExchange implements ActionListener, ListSelectionLi
             && (! event.getValueIsAdjusting()))
         {
             try
-            {
-                gui.displayMessageInDialog("Not necessary for value change");              
+            { 
+                //gui.displayMessageInDialog("Not necessary for value change");              
             }
             catch (Exception e)
             {

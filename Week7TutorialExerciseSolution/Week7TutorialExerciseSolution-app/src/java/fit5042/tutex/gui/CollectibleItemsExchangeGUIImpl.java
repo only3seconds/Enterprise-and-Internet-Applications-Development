@@ -135,7 +135,22 @@ public class CollectibleItemsExchangeGUIImpl extends JFrame implements Collectib
         this.setSize(750, 570);       
         this.setVisible(true);
     }
+    
+    @Override
+    public int getItemId() {
+        String id = this.itemIdTextField.getText();
+        return id == null || id.isEmpty() ? 0 : Integer.parseInt(id);
+    }
 
+    @Override   
+    public String getItemTitle() {
+        return this.titleTextField.getText();
+    }
+    
+    @Override
+    public String getItemType() {
+        return this.typeTextField.getText();
+    }
     
     @Override
     public double getBudget() {
@@ -275,12 +290,5 @@ public class CollectibleItemsExchangeGUIImpl extends JFrame implements Collectib
                             Double.parseDouble(priceTextField.getText()),
                             this.getItemLabels());                        
     }
-
-    @Override
-    public int getItemId() {
-        String id = this.itemIdTextField.getText();
-        return id == null || id.isEmpty() ? 0 : Integer.parseInt(id);
-    }
-
 }
 

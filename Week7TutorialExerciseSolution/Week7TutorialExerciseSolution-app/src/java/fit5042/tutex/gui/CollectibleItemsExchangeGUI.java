@@ -100,6 +100,10 @@ public interface CollectibleItemsExchangeGUI {
      */
     int getItemId();
     
+    String getItemTitle();
+    
+    String getItemType();
+    
     /**
      * Return the maximum price of the item that the user wants to search the repository for
      *
