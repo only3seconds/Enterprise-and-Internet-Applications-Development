@@ -22,35 +22,35 @@
     
     <h:form>
         <!-- Item ID -->		
-        <p>Item ID: <h:message for="personName" styleClass="error" /></p>		
-        <h:inputText id="itemID" label="Name" size="32" value="#{personBean.name}">
+        <p>Item ID: <h:message for="need ItemId" styleClass="error" /></p>		
+        <h:inputText id="itemID" label="Name" size="32" disabled="true" value="#{personBean.title}">
         </h:inputText>	
         <!-- Title -->		
-        <p>Title : <h:message for="personName" styleClass="error" /></p>		
-        <h:inputText id="title" label="Name" size="32" value="#{personBean.name}">
+        <p>Title : <h:message for="need Title" styleClass="error" /></p>		
+        <h:inputText id="title" label="Name" size="32" value="#{itemController.title}">
         </h:inputText>	
         <!-- Type -->		
-        <p>Type: <h:message for="personName" styleClass="error" /></p>		
-        <h:inputText id="type" label="Name" size="32" value="#{personBean.name}">
+        <p>Type: <h:message for="need Type" styleClass="error" /></p>		
+        <h:inputText id="type" label="Name" size="32" value="#{itemController.type}">
         </h:inputText>	
         <!--  Avaliable Units-->		
-        <p>Avaliable Units: <h:message for="personName" styleClass="error" /></p>		
-        <h:inputText id="avaliableUnits" label="Name" size="32" value="#{personBean.name}">
+        <p>Avaliable Units: <h:message for="new Units" styleClass="error" /></p>		
+        <h:inputText id="avaliableUnits" label="Name" size="32" disabled="true" value="#{personBean.type}">
         </h:inputText>	
         <!-- Price -->		
-        <p>Price: <h:message for="personName" styleClass="error" /></p>		
-        <h:inputText id="price" label="Name" size="32" value="#{personBean.name}">
+        <p>Price: <h:message for="need Price" styleClass="error" /></p>		
+        <h:inputText id="price" label="Name" size="32" value="#{itemController.price}">
         </h:inputText>	
         <p></p>
-        <h:commandButton styleClass="button" value="Search" action="response"/>		
-        <h:commandButton styleClass="button" value="View" action="response"/>		
+        <h:commandButton styleClass="button" value="Search" action="#{itemController.searchItem()}"/>		
+        <h:commandButton styleClass="button" value="View" action="#{itemController.displayAllItems()}"/>		
         <h:commandButton styleClass="button" value="Close" action="response"/>
-        <h:dataTable value="#{personBean.itemList}" var="itemEntry"
+        <h:dataTable value="#{itemController.itemList}" var="itemEntry"
                      styleClass="itemTable" headerClass="item-table-header" 
                      rowClasses="item-table-odd-row,item-table-even-row">
             <h:column>            
                 <f:facet name="header">ID</f:facet>            
-                #{itemEntry.id}
+                #{itemEntry.itemId}
             </h:column>
             <h:column>
                <f:facet name="header">Title</f:facet>
@@ -62,7 +62,7 @@
             </h:column>
             <h:column>
                <f:facet name="header">AvailableUnits</f:facet>
-               #{itemEntry.avaliableUnits}
+               #{itemEntry.availableUnits}
             </h:column>
             <h:column>
                <f:facet name="header">Price</f:facet>

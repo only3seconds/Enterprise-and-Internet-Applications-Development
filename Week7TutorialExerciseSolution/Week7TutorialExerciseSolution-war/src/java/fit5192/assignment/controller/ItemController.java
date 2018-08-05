@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 
@@ -21,10 +22,14 @@ import javax.enterprise.context.SessionScoped;
  * @author thinking
  */
 @Named(value = "itemController")
-@SessionScoped
 public class ItemController implements Serializable {
+    
+    private String title;
+    private String type;
+    private double price;
 
-
+    private List<ItemWrapper> itemWrapperList;
+    
     @EJB
     private static ItemRepository itemRepository;
     
@@ -32,20 +37,28 @@ public class ItemController implements Serializable {
      * Creates a new instance of ItemController
      */
     public ItemController() {
-        
+        itemWrapperList = new ArrayList<>();
     }
     
     //Search
     public List<ItemWrapper> searchItem() {
+        //TODO
+        List<Item> itemList = new ArrayList<>();
+        if(null != title && !title.isEmpty()) {
+            itemList = this.searchItemByTitle(title);
+        } else if(null != type && !type.isEmpty()) {
+            itemList = this.searchItemByType(type);
+        } else if(price > 0) {
+            itemList = this.searchItemByBudget(price);
+        } else {
+            System.out.println("Do nothing");
+        }
         
-        
-        
-//        List<ItemWrapper> itemWrapperList = new ArrayList<>();
-//            for(Item i : items) {
-//                ItemWrapper itemWrapper = new ItemWrapper(i.getItemId(), i.getTitle(), i.getLabels().toString(), i.getNumberInStore(), i.getPerPrice());
-//                itemWrapperList.add(itemWrapper);          
-//            }
-        return null;
+        for(Item i : itemList) {
+            ItemWrapper itemWrapper = new ItemWrapper(i.getItemId(), i.getTitle(), i.getLabels().toString(), i.getNumberInStore(), i.getPerPrice());
+            itemWrapperList.add(itemWrapper);          
+        }
+        return itemWrapperList;
     }
     
     private List<Item> searchItemByBudget(double budget) {
@@ -80,12 +93,10 @@ public class ItemController implements Serializable {
     public List<ItemWrapper> displayAllItems() {
         try {
             List<Item> itemList = itemRepository.getAllItems();
-            List<ItemWrapper> itemWrapperList = new ArrayList<>();
             for(Item i : itemList) {
                 ItemWrapper itemWrapper = new ItemWrapper(i.getItemId(), i.getTitle(), i.getLabels().toString(), i.getNumberInStore(), i.getPerPrice());
                 itemWrapperList.add(itemWrapper);          
             }
-            
             return itemWrapperList;
             
         } catch (Exception ex) {
@@ -93,5 +104,44 @@ public class ItemController implements Serializable {
             return new ArrayList<>();
         }       
     }
-    
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public List<ItemWrapper> getItemWrapperList() {
+        return itemWrapperList;
+    }
+
+    public void setItemWrapperList(List<ItemWrapper> itemList) {
+        this.itemWrapperList = itemList;
+    }
+
+    public static ItemRepository getItemRepository() {
+        return itemRepository;
+    }
+
+    public static void setItemRepository(ItemRepository itemRepository) {
+        ItemController.itemRepository = itemRepository;
+    }
 }
