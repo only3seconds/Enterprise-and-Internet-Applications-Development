@@ -29,15 +29,15 @@ textarea	{	display: block;	margin-bottom: 10px;	height: 240px;	width: 480px;}
 .button {width: 200px; style:"border: 2px solid #00000";}
 
 .item-table-header{
-  bbook-bottom:1px solid #BBB;
+  border-bottom:1px solid #BBB;
   padding:16px;
 }
 
 .item-table-odd-row{
-  bbook-top:1px solid #BBB;
+  border-top:1px solid #BBB;
 }
 
 .item-table-even-row{
-  bbook-top:1px solid #BBB;
+  border-top:1px solid #BBB;
 }
 
