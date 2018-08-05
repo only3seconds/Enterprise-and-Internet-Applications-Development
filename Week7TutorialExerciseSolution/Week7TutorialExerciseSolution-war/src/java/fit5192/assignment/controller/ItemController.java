@@ -5,10 +5,21 @@
  */
 package fit5192.assignment.controller;
 
+import javax.inject.Named;
+import javax.enterprise.context.RequestScoped;
+
 /**
  *
  * @author thinking
  */
-public class Test {
+@Named(value = "itemController")
+@RequestScoped
+public class ItemController {
+
+    /**
+     * Creates a new instance of ItemController
+     */
+    public ItemController() {
+    }
     
 }
