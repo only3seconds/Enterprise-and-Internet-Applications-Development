@@ -1,58 +1,86 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package fit5042.tutex.repository.entities;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.CollectionTable;
+import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Eddie
+ * @author thinking
  */
-@Entity
-@NamedQueries({@NamedQuery(name = Item.GET_ALL_QUERY_NAME, query = "SELECT i FROM Item i")
-, @NamedQuery(name = "Item.findByItemId", query = "SELECT i FROM Item i WHERE i.itemId = :itemId")})
+@MappedSuperclass
+@Table(catalog = "", schema = "FIT5192")
+@XmlRootElement
 public class Item implements Serializable {
-    
-    public static final String GET_ALL_QUERY_NAME = "Item.getAll";
-    
-    private int itemId; 
-    private String title;
-    private String imageURL;
-    private int numberInStore;
-    private int totalNumberInCirculation;
-    private double perPrice;
 
-    private Set<String> labels;
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "ITEM_ID", nullable = false)
+    private Integer itemId;
+    @Size(max = 255)
+    @Column(name = "IMAGE_URL", length = 255)
+    private String imageUrl;
+    @Column(name = "NUMBER_IN_STORE")
+    private Integer numberInStore;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "PER_PRICE", precision = 52)
+    private Double perPrice;
+    @Size(max = 255)
+    @Column(length = 255)
+    private String title;
+    @Column(name = "TOTAL_NUMBER_IN_CIRCULATION")
+    private Integer totalNumberInCirculation;
 
     public Item() {
-        this.labels = new HashSet<>();
     }
 
-    public Item(int itemId, String title, String imageURL, int numberInStore, int totalNumberInCirculation, double perPrice, Set<String> labels) {
+    public Item(Integer itemId) {
         this.itemId = itemId;
-        this.title = title;
-        this.imageURL = imageURL;
-        this.numberInStore = numberInStore;
-        this.totalNumberInCirculation = totalNumberInCirculation;
-        this.perPrice = perPrice;
-        this.labels = labels;
     }
 
-    @Id
-    @Column(name = "item_id")
-    public int getItemId() {
+    public Integer getItemId() {
         return itemId;
     }
 
-    public void setItemId(int itemId) {
+    public void setItemId(Integer itemId) {
         this.itemId = itemId;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public Integer getNumberInStore() {
+        return numberInStore;
+    }
+
+    public void setNumberInStore(Integer numberInStore) {
+        this.numberInStore = numberInStore;
+    }
+
+    public Double getPerPrice() {
+        return perPrice;
+    }
+
+    public void setPerPrice(Double perPrice) {
+        this.perPrice = perPrice;
     }
 
     public String getTitle() {
@@ -63,55 +91,37 @@ public class Item implements Serializable {
         this.title = title;
     }
 
-    @Column(name = "image_url")
-    public String getImageURL() {
-        return imageURL;
-    }
-
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
-    }
-
-    @Column(name = "number_in_store")
-    public int getNumberInStore() {
-        return numberInStore;
-    }
-
-    public void setNumberInStore(int numberInStore) {
-        this.numberInStore = numberInStore;
-    }
-
-    @Column(name = "total_number_in_circulation")
-    public int getTotalNumberInCirculation() {
+    public Integer getTotalNumberInCirculation() {
         return totalNumberInCirculation;
     }
 
-    public void setTotalNumberInCirculation(int totalNumberInCirculation) {
+    public void setTotalNumberInCirculation(Integer totalNumberInCirculation) {
         this.totalNumberInCirculation = totalNumberInCirculation;
     }
 
-    @Column(name = "per_price")
-    public double getPerPrice() {
-        return perPrice;
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (itemId != null ? itemId.hashCode() : 0);
+        return hash;
     }
 
-    public void setPerPrice(double perPrice) {
-        this.perPrice = perPrice;
-    }
-
-    @ElementCollection
-    @CollectionTable(name = "labels")
-    @Column(name = "value")
-    public Set<String> getLabels() {
-        return labels;
-    }
-
-    public void setLabels(Set<String> labels) {
-        this.labels = labels;
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Item)) {
+            return false;
+        }
+        Item other = (Item) object;
+        if ((this.itemId == null && other.itemId != null) || (this.itemId != null && !this.itemId.equals(other.itemId))) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return "Item{" + "itemId=" + itemId + ", title=" + title + ", imageURL=" + imageURL + ", numberInStore=" + numberInStore + ", totalNumberInCirculation=" + totalNumberInCirculation + ", perPrice=" + perPrice + ", labels=" + labels + '}';
+        return "fit5042.tutex.repository.entities.Item[ itemId=" + itemId + " ]";
     }
+    
 }

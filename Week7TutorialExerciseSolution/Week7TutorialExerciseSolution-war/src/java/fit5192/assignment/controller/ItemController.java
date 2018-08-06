@@ -14,9 +14,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 
 /**

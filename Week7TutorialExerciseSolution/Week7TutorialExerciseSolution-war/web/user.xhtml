@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>		
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+<h:head>
+    <h:outputStylesheet name="css/style.css"/>
+<title>User - Home</title>	
+</h:head>
+    
+<h:body>		
+	
+<header>		
+    <h1>Search View Update Delete Users</h1>	
+</header>		
+		
+<!-- Start Article -->		
+<article>		
+    <h2>Enter User properties</h2>		
+    <hr	/>
+    
+    <h:form>
+        <!-- User ID -->		
+        <p>User ID:</p>		
+        <h:inputText id="userID" label="id" size="32"  value="#{userController.userId}"></h:inputText>
+        
+        <!-- Last Name -->		
+        <p>Last Name :</p>		
+        <h:inputText id="lastName" label="lastName" size="32" value="#{userController.lastName}"></h:inputText>
+        
+        <!-- First Name -->		
+        <p>First Name:</p>		
+        <h:inputText id="type" label="firstName" size="32" value="#{userController.firstName}"></h:inputText>
+        
+        <!--  Phone Number-->		
+        <p>Phone Number</p>		
+        <h:inputText id="phoneNumber" label="phoneNumber" size="32" value="#{userController.phoneNumber}"></h:inputText>
+        
+        <!-- Email -->		
+        <p>Email:</p>		
+        <h:inputText id="email" label="email" size="32" value="#{userController.email}"></h:inputText>	
+        
+        <p></p>		
+        <h:commandButton styleClass="button" value="Search" action="#{userController.searchUser()}"/>		
+        <h:commandButton styleClass="button" value="Add" action="#{userController.addUSer()}"/>
+        <h:commandButton styleClass="button" value="Update" action="#{userController.updateUSer()}"/>
+        <h:commandButton styleClass="button" value="Delete" action="#{userController.deleteUser()}"/>
+        <h:commandButton styleClass="button" value="View" action="#{userController.displayAllUsers()}"/>
+        
+        <h:dataTable value="#{userController.userList}" var="userEntry"
+                     styleClass="userTable" headerClass="user-table-header" 
+                     rowClasses="user-table-odd-row,user-table-even-row">
+            <h:column>            
+                <f:facet name="header">userId</f:facet>            
+                #{userEntry.userId}
+            </h:column>
+            <h:column>
+               <f:facet name="header">lastName</f:facet>
+               #{userEntry.lastName}
+            </h:column>
+            <h:column>
+               <f:facet name="header">firstName</f:facet>
+               #{userEntry.firstName}
+            </h:column>
+            <h:column>
+               <f:facet name="header">PhoneNumber</f:facet>
+               #{userEntry.phoneNumber}
+            </h:column>
+            <h:column>
+               <f:facet name="header">Email</f:facet>
+               #{userEntry.email}
+            </h:column>
+        </h:dataTable>
+    </h:form>
+</article>		
+
+<!-- Start Footer -->		
+<footer>		
+    <p>This project created by Pan Pingping</p>
+</footer>		
+<!-- End Footer	-->		
+</h:body>
+    
+    
+</html>

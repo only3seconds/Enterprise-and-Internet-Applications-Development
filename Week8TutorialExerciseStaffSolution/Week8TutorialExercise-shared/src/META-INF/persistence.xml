@@ -3,6 +3,7 @@
   <persistence-unit name="Week8TutorialExercise-sharedPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>fit5042.tutex.repository.entities.Test</class>
+    <class>fit5042.tutex.repository.entities.Item</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/Tutorial8DB"/>
       <property name="javax.persistence.jdbc.user" value="tutorial8"/>
