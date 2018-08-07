@@ -6,7 +6,6 @@
 package fit5042.tutex.repository.entities;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,8 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -33,6 +30,7 @@ public class SubOrder implements Serializable {
     
     private Integer orderId;
     private Integer itemsCount;
+    private int purchaseOrSale;
     
     private Exchange exchange;
     private Item item;
@@ -68,6 +66,16 @@ public class SubOrder implements Serializable {
         this.itemsCount = itemsCount;
     }
 
+    @Column(name = "purchase_sale")
+    public int getPurchaseOrSale() {
+        return purchaseOrSale;
+    }
+
+    public void setPurchaseOrSale(int purchaseOrSale) {
+        this.purchaseOrSale = purchaseOrSale;
+    }
+
+    
     @ManyToOne
     public Exchange getExchange() {
         return exchange;

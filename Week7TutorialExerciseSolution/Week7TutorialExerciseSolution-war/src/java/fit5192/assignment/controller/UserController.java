@@ -95,10 +95,11 @@ public class UserController implements Serializable {
     
     
     //Update
-    public String updateUSer() {
+    public String updateUser() {
         try{
+            sysUser = new SysUser(userId, email, password, membershipLevel, lastName, firstName, phoneNumber, availableCredits);
             userOperation.updateUser(sysUser);
-            return Navigation.user.toString();
+            return displayAllUsers();
             
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -110,16 +111,14 @@ public class UserController implements Serializable {
     
     //Delete
     public String deleteUser() {
-//        try{
-//            SysUser sysUser = new SysUser(userId, email, password, membershipLevel, lastName, firstName, phoneNumber, availableCredits);
-//            userOperation.addUser(sysUser);
-//            return displayAllUsers();
-//            //return Navigation.user.toString();
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//            return Navigation.user.toString();
-//        }   
-           return Navigation.user.toString();
+        try{
+            userOperation.deleteUser(this.userId);
+            return displayAllUsers();
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return Navigation.user.toString();
+        }
     }
     
     private List<SysUser> searchUserById(int id) {
