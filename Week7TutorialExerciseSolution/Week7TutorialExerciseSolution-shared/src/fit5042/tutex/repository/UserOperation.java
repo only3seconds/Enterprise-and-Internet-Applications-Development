@@ -29,9 +29,9 @@ public interface UserOperation {
     
     public void addUser(SysUser sysUser) throws Exception;
     
-    public void update(int userId) throws Exception;
+    public void updateUser(SysUser sysUser) throws Exception;
     
-    public void delete(int userId) throws Exception;
+    public void deleteUser(int userId) throws Exception;
     
     public List<SysUser> getAllUsers() throws Exception;
     

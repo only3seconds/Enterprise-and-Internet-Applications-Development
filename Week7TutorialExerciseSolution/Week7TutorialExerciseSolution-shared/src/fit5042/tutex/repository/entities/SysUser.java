@@ -16,10 +16,22 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "SYS_USER")
-@NamedQueries({@NamedQuery(name = SysUser.GET_ALL_QUERY_NAME, query = "SELECT s FROM SysUser s")})
+@NamedQueries({
+    @NamedQuery(name = SysUser.GET_ALL_QUERY_NAME, query = "SELECT s FROM SysUser s"),
+    @NamedQuery(name = SysUser.FIND_BY_ID, query = "SELECT s FROM SysUser s where s.userId = :userId"),
+    @NamedQuery(name = SysUser.FIND_BY_LASTNAME, query = "SELECT s FROM SysUser s where s.lastName = :lastName"),
+    @NamedQuery(name = SysUser.FIND_BY_FIRSTNAME, query = "SELECT s FROM SysUser s where s.firstName = :firstName"),
+    @NamedQuery(name = SysUser.FIND_BY_PHONENUMBER, query = "SELECT s FROM SysUser s where s.phoneNumber = :phoneNumber"),
+    @NamedQuery(name = SysUser.FIND_BY_EMAIL, query = "SELECT s FROM SysUser s where s.email = :email")})
 public class SysUser implements Serializable {
     
     public static final String GET_ALL_QUERY_NAME = "SysUser.getAll";
+    public static final String FIND_BY_ID = "SysUser.findById";
+    public static final String FIND_BY_LASTNAME = "SysUser.findByLastName";
+    public static final String FIND_BY_FIRSTNAME = "SysUser.findByFirstName";
+    public static final String FIND_BY_PHONENUMBER = "SysUser.findByPhoneNumber";
+    public static final String FIND_BY_EMAIL = "User.findByEmail";
+    
     
     private int userId;
     private String email;
@@ -35,6 +47,17 @@ public class SysUser implements Serializable {
     public SysUser() {
     }
 
+    public SysUser(int userId, String email, String password, String membershiLevel, String lastName, String firstName, String phoneNumber, double availableCredits) {
+        this.userId = userId;
+        this.email = email;
+        this.password = password;
+        this.membershipLevel = membershiLevel;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.phoneNumber = phoneNumber;
+        this.availableCredits = availableCredits;
+    }
+    
     public SysUser(int userId, String email, String password, String membershiLevel, String lastName, String firstName, Address address, String phoneNumber, double availableCredits) {
         this.userId = userId;
         this.email = email;

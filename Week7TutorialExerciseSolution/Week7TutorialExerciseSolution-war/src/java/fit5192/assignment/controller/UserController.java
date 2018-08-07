@@ -22,12 +22,17 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean(name = "userController")
 public class UserController implements Serializable {
     private int userId;
+    private String email;
+    private String password;
+    private String membershipLevel;
     private String lastName;
     private String firstName;
     private String phoneNumber;
-    private String email;
+    private double availableCredits;
+    
 
     private List<SysUser> userList;
+    private SysUser sysUser;
     
     @EJB
     private UserOperation userOperation;
@@ -40,10 +45,15 @@ public class UserController implements Serializable {
     }
     
     //View
-    public String displayAllUsers() {
+     public String displayAllUsers() {
         try {
-            List<SysUser> userList = userOperation.getAllUsers();
-            return Navigation.item.toString();     
+            userList = userOperation.getAllUsers();
+            
+            for(SysUser s: userList) {
+                System.out.println("email = " + s.getEmail());
+            }
+            return Navigation.user.toString();
+            
         } catch (Exception ex) {
             ex.printStackTrace();
             return Navigation.user.toString();
@@ -52,8 +62,6 @@ public class UserController implements Serializable {
     
     //Search
     public String searchUser() {
-        
-        List<SysUser> userList = new ArrayList<>();
         if(userId > 0) {
             userList = this.searchUserById(userId);
         } else if(null != lastName && !lastName.isEmpty()) {
@@ -73,18 +81,45 @@ public class UserController implements Serializable {
     }
     
     //Add
-    public String addUser() {
-        return Navigation.user.toString();
+      public String addUser() {
+        try{
+            sysUser = new SysUser(userId, email, password, membershipLevel, lastName, firstName, phoneNumber, availableCredits);
+            userOperation.addUser(sysUser);
+            return displayAllUsers();
+            //return Navigation.user.toString();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return Navigation.user.toString();
+        }    
     }
+    
     
     //Update
     public String updateUSer() {
-        return Navigation.user.toString();
+        try{
+            userOperation.updateUser(sysUser);
+            return Navigation.user.toString();
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return Navigation.user.toString();
+        } 
+        
+        
     }
     
     //Delete
     public String deleteUser() {
-        return Navigation.user.toString();
+//        try{
+//            SysUser sysUser = new SysUser(userId, email, password, membershipLevel, lastName, firstName, phoneNumber, availableCredits);
+//            userOperation.addUser(sysUser);
+//            return displayAllUsers();
+//            //return Navigation.user.toString();
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//            return Navigation.user.toString();
+//        }   
+           return Navigation.user.toString();
     }
     
     private List<SysUser> searchUserById(int id) {
@@ -133,8 +168,6 @@ public class UserController implements Serializable {
             return new ArrayList<>();
         }
     }
-    
-
 
     public int getUserId() {
         return userId;
@@ -142,6 +175,30 @@ public class UserController implements Serializable {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getMembershipLevel() {
+        return membershipLevel;
+    }
+
+    public void setMembershipLevel(String membershipLevel) {
+        this.membershipLevel = membershipLevel;
     }
 
     public String getLastName() {
@@ -168,12 +225,12 @@ public class UserController implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getEmail() {
-        return email;
+    public double getAvailableCredits() {
+        return availableCredits;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setAvailableCredits(double availableCredits) {
+        this.availableCredits = availableCredits;
     }
 
     public List<SysUser> getUserList() {
@@ -191,7 +248,14 @@ public class UserController implements Serializable {
     public void setUserOperation(UserOperation userOperation) {
         this.userOperation = userOperation;
     }
-    
+
+    public SysUser getSysUser() {
+        return sysUser;
+    }
+
+    public void setSysUser(SysUser sysUser) {
+        this.sysUser = sysUser;
+    }
     
     
 }

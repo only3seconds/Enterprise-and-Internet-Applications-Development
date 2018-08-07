@@ -5,12 +5,10 @@
  */
 package fit5192.assignment.controller;
 
-import fit5042.tutex.repository.entities.SysPermission;
 import fit5042.tutex.repository.entities.SysUser;
 import fit5192.assignment.model.ActiveUser;
 import fit5192.assignment.navigation.Navigation;
 import fit5192.assignment.util.MD5;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import fit5042.tutex.repository.UserOperation;
@@ -31,7 +29,10 @@ public class LoginController {
     public String login() {
         try {
             ActiveUser activeUser = authenticate(userEmail, password);
+            if(activeUser == null)
+                return Navigation.login.toString();
         } catch (Exception e) {
+            return null;
         }
         return Navigation.item.toString();
     }
@@ -57,19 +58,19 @@ public class LoginController {
         
         //get the userId
         int userId = sysUser.getUserId();
-        //根据用户id 查询菜单
-        List<SysPermission> menus = userOperation.findMenuListByUserId(userId);
-        //根据用户id 查询权限url
-        List<SysPermission> permissions = userOperation.findPermissionListByUserId(userId);
-        
+//        //根据用户id 查询菜单
+//        List<SysPermission> menus = userOperation.findMenuListByUserId(userId);
+//        //根据用户id 查询权限url
+//        List<SysPermission> permissions = userOperation.findPermissionListByUserId(userId);
+//        
         //认证通过，返回用户信息
         ActiveUser activeUser = new ActiveUser();
         activeUser.setUserId(sysUser.getUserId());
         activeUser.setUserEmial(sysUser.getEmail());
         
-        //放入权限范围的菜单和url
-        activeUser.setMenus(menus);
-        activeUser.setPermissions(permissions);
+//        //放入权限范围的菜单和url
+//        activeUser.setMenus(menus);
+//        activeUser.setPermissions(permissions);
         
         return activeUser;
         

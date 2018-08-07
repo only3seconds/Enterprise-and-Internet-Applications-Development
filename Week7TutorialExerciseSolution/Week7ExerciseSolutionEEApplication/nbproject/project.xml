@@ -8,15 +8,15 @@
             <web-module-libraries/>
             <web-module-additional-libraries>
                 <library>
+                    <file>${reference.Week7TutorialExerciseSolution-war.dist-ear}</file>
+                    <path-in-war>/</path-in-war>
+                </library>
+                <library>
                     <file>${reference.Week7TutorialExerciseSolution-ejb.dist-ear}</file>
                     <path-in-war>/</path-in-war>
                 </library>
                 <library>
                     <file>${reference.Week7TutorialExerciseSolution-app.j2ee-module-car}</file>
-                    <path-in-war>/</path-in-war>
-                </library>
-                <library>
-                    <file>${reference.Week7TutorialExerciseSolution-war.dist-ear}</file>
                     <path-in-war>/</path-in-war>
                 </library>
             </web-module-additional-libraries>

@@ -24,47 +24,61 @@ public class JPAUserOperationImpl implements UserOperation {
 
     @Override
     public SysUser searchUserById(int id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        SysUser sysUser = entityManager.createNamedQuery(SysUser.FIND_BY_ID, SysUser.class)
+                .setParameter("userId", id).getSingleResult();
+        return sysUser;
     }
 
     @Override
     public List<SysUser> searchUserByLastName(String lastName) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<SysUser> userList = entityManager.createNamedQuery(SysUser.FIND_BY_LASTNAME, SysUser.class)
+                .setParameter("lastName", lastName).getResultList();
+        return userList;
     }
 
     @Override
     public List<SysUser> searchUserByFirstName(String firstName) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<SysUser> userList = entityManager.createNamedQuery(SysUser.FIND_BY_FIRSTNAME, SysUser.class)
+                .setParameter("firstName", firstName).getResultList();
+        return userList;
     }
 
     @Override
-    public List<SysUser> searchUserByPhoneNumber(String phoneNuber) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<SysUser> searchUserByPhoneNumber(String phoneNumber) throws Exception {
+        List<SysUser> userList = entityManager.createNamedQuery(SysUser.FIND_BY_PHONENUMBER, SysUser.class)
+                .setParameter("phoneNumber", phoneNumber).getResultList();
+        return userList;
     }
 
     @Override
     public SysUser searchUserByEmail(String email) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        SysUser sysUser = entityManager.createNamedQuery(SysUser.FIND_BY_EMAIL, SysUser.class)
+                .setParameter("email", email).getSingleResult();
+        return sysUser;
     }
 
     @Override
     public void addUser(SysUser sysUser) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        entityManager.persist(sysUser);
     }
 
     @Override
-    public void update(int userId) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void updateUser(SysUser sysUser) throws Exception {
+        entityManager.merge(sysUser);
+        
     }
 
     @Override
-    public void delete(int userId) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void deleteUser(int userId) throws Exception {
+        SysUser sysUser = this.searchUserById(userId);
+        if(sysUser != null) {
+            entityManager.remove(sysUser);
+        }  
     }
 
     @Override
     public List<SysUser> getAllUsers() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return entityManager.createNamedQuery(SysUser.GET_ALL_QUERY_NAME).getResultList();
     }
 
     @Override
@@ -74,7 +88,7 @@ public class JPAUserOperationImpl implements UserOperation {
 
     @Override
     public List<SysPermission> findPermissionListByUserId(int userId) throws Exception {
-        return entityManager.createNamedQuery(SysUser.GET_ALL_QUERY_NAME).getResultList();
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
         

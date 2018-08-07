@@ -4,10 +4,10 @@
     <jta-data-source>jdbc/RealEstateDataSource</jta-data-source>
     <class>fit5042.tutex.repository.entities.ContactPerson</class>
     <class>fit5042.tutex.repository.entities.Property</class>
-    <class>fit5042.tutex.repository.entities.SysUser</class>
     <class>fit5042.tutex.repository.entities.Item</class>
     <class>fit5042.tutex.repository.entities.Exchange</class>
     <class>fit5042.tutex.repository.entities.SubOrder</class>
+    <class>fit5042.tutex.repository.entities.SysUser</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
