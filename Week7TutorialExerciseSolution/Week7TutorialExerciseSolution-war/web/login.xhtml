@@ -8,23 +8,45 @@ and open the template in the editor.
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <h1>User Login</h1>
-        <h:form>
-            <label for="userEmail">User Email:</label>
-            <input type="text" name="userEmail" />
-            <p></p>
-            <label for="password">Password:</label>
-            <input type="password" name="password" />
-
-            <p></p>
-            <h:commandButton styleClass="button" value="Login" action="#{loginController.login()}"/>
-        </h:form>	
         
-        <div>TODO write content</div>
-    </body>
+<h:head>
+    <h:outputStylesheet name="css/style.css"/>
+<title>Item - Home</title>	
+</h:head>
+
+<h:body>		
+	
+<header>		
+    <h1>User Login</h1>		
+</header>		
+<article>		
+    <h2>Enter your Email and password</h2>		
+    <hr	/>
+    		
+    <h:form>
+        <div>
+            <b>UserEmail: </b>		
+            <h:inputText id="userEmail" label="id" size="32" value="#{loginController.userEmail}">
+            </h:inputText>	
+        </div>
+        <div>
+            <b>Password: </b>		
+            <h:inputSecret id="title" label="title" size="32" value="#{loginController.password}">
+            </h:inputSecret>	
+        </div>
+        <p></p>
+        <h:commandButton styleClass="button" value="Login" action="#{loginController.login()}"/>
+    </h:form>	
+        
+</article>		
+
+<!-- Start Footer -->		
+<footer>		
+    <p>This project created by Pan pingping</p>
+</footer>		
+<!-- End Footer	-->		
+</h:body>
+    
+    
 </html>
+

@@ -15,5 +15,6 @@ public enum Navigation {
     index,
     item,
     login,
-    user;
+    user,
+    error;
 }

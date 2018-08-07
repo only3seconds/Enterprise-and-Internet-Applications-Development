@@ -12,6 +12,8 @@ import fit5192.assignment.util.MD5;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import fit5042.tutex.repository.UserOperation;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -29,12 +31,22 @@ public class LoginController {
     public String login() {
         try {
             ActiveUser activeUser = authenticate(userEmail, password);
-            if(activeUser == null)
-                return Navigation.login.toString();
+            if(activeUser == null) {
+                System.out.println("no found "+userEmail);
+                return Navigation.error.toString();
+//                return Navigation.error.toString();
+            }
+            System.out.println("userEmail: "+userEmail+"login success");
+            // 创建session，将用户名和ActiveUser填进去
+            HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            session.setAttribute("userEmail", userEmail);
+            session.setAttribute("activeUser", activeUser);
+            // 跳转到 item.xhml页面
+            return Navigation.item.toString();
         } catch (Exception e) {
-            return null;
+            e.printStackTrace();
+            return Navigation.error.toString();
         }
-        return Navigation.item.toString();
     }
     /**
      * 用户认证
@@ -49,10 +61,10 @@ public class LoginController {
             throw new Exception("User no exist!");
         }
         
-        String password_db = sysUser.getPassword();
-        String password_input = new MD5().getMD5ofStr(password);
+        String passwordDb = sysUser.getPassword();
+        String passwordInput = MD5.getMD5ofStr(password);
         
-        if(!password_input.equalsIgnoreCase(password_db)) { 
+        if(!passwordInput.equalsIgnoreCase(passwordDb)) { 
             throw new Exception("User email or password is wrong!");
         }
         
@@ -73,7 +85,21 @@ public class LoginController {
 //        activeUser.setPermissions(permissions);
         
         return activeUser;
-        
     }
-    
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

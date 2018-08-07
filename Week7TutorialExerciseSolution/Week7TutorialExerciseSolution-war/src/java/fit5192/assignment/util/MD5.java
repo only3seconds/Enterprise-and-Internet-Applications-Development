@@ -14,14 +14,15 @@ import java.security.NoSuchAlgorithmException;
  */
 public class MD5 {
     
-    /**
-     * 生成32位md5码
-     * @param password
-     * @return
-     */
-    public MD5() {
-        
+    private MD5() {
+        throw new IllegalAccessError("static class");
     }
+    
+    public static void main(String [] args) {
+        String password = "2B";
+        System.out.println(getMD5ofStr(password));
+    }
+            
     
     public static String getMD5ofStr(String password) {
 
@@ -40,7 +41,6 @@ public class MD5 {
                 }
                 buffer.append(str);
             }
-
             // 标准的md5加密后的结果
             return buffer.toString();
         } catch (NoSuchAlgorithmException e) {
