@@ -15,8 +15,6 @@ import java.util.Arrays;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -30,6 +28,7 @@ public class ItemController implements Serializable {
     private double price;
 
     private List<ItemWrapper> itemWrapperList;
+    private Item item;
     
     @EJB
     private ItemRepository itemRepository;
@@ -107,6 +106,11 @@ public class ItemController implements Serializable {
         }       
     }
 
+    //View Detail
+    public void viewDetail() {
+        
+    }
+    
     public String getTitle() {
         return title;
     }

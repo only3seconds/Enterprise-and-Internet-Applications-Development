@@ -3,89 +3,131 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    
-<h:head>
-    <h:outputStylesheet name="css/style.css"/>
-<title>Item - Home</title>	
-</h:head>
-    
-<h:body>		
-	
-<header>		
-    <h1>Item Main Page</h1>		
-</header>		
-		
-<!-- Start	Article	-->		
-<article>		
-    <h2>Welcome <b style="color: red; font-size: 50px">#{session.getAttribute("userEmail")}</b>Enter your Item properties</h2>		
-    <hr	/>
-    
-    <h:form>
-        <!-- Item ID -->		
-        <p>Item ID:		
-        <h:inputText id="itemID" label="id" size="32" disabled="true" value="#{itemController.title}"></h:inputText>
-        </p>
-        
-        <!-- Title -->		
-        <p>Title :		
-        <h:inputText id="title" label="title" size="32" value="#{itemController.title}"></h:inputText>
-        </p>
-        
-        <!-- Type -->		
-        <p>Type:		
-        <h:inputText id="type" label="type" size="32" value="#{itemController.type}"></h:inputText>
-        </p>
-        
-        <!--  Avaliable Units-->		
-        <p>Avaliable Units:	
-        <h:inputText id="avaliableUnits" label="avaliableUnits" size="32" disabled="true" value="#{itemController.type}"></h:inputText>
-        </p>
-        
-        <!-- Price -->		
-        <p>Price:		
-        <h:inputText id="price" label="price" size="32" value="#{itemController.price}"></h:inputText>
-        </p>
-        
-        <p></p>
-        
-        <h:commandButton styleClass="button" value="Search" action="#{itemController.searchItem()}"/>		
-        <h:commandButton styleClass="button" value="View" action="#{itemController.displayAllItems()}"/>
-        
-        <h:dataTable value="#{itemController.itemWrapperList}" var="itemEntry"
-                     styleClass="orders" headerClass="ordersHeader" 
-                     rowClasses="evenColumn,oddColumn">
-            <h:outputStylesheet name="css/table.css"/>
-            <h:column>            
-                <f:facet name="header">ID</f:facet>            
-                #{itemEntry.itemId}
-            </h:column>
-            <h:column>
-               <f:facet name="header">Title</f:facet>
-               #{itemEntry.title}
-            </h:column>
-            <h:column>
-               <f:facet name="header">Type</f:facet>
-               #{itemEntry.type}
-            </h:column>
-            <h:column>
-               <f:facet name="header">AvailableUnits</f:facet>
-               #{itemEntry.availableUnits}
-            </h:column>
-            <h:column>
-               <f:facet name="header">Price</f:facet>
-               #{itemEntry.price}
-            </h:column>
-        </h:dataTable>
-    </h:form>
-</article>		
 
-<!-- Start Footer -->		
-<footer>		
-    <p>This project created by Pan pingping</p>
-</footer>		
-<!-- End Footer	-->		
-</h:body>
-    
-    
+    <h:head>
+        <h:outputStylesheet name="css/style.css"/>
+        <title>Item - Home</title>	
+    </h:head>
+
+    <h:body>		
+
+        <header>		
+            <h1>Item Main Page</h1>		
+        </header>		
+
+        <!-- Start	Article	-->		
+        <article>		
+            <h2>Welcome <b style="color: red; font-size: 50px">#{session.getAttribute("userEmail")}</b>Enter your Item properties</h2>		
+            <hr	/>
+
+            <h:form>
+                <!-- Item ID -->		
+                <p>Item ID:		
+                    <h:inputText id="itemID" label="id" size="32" disabled="true" value="#{itemController.title}"></h:inputText>
+                </p>
+
+                <!-- Title -->		
+                <p>Title :		
+                    <h:inputText id="title" label="title" size="32" value="#{itemController.title}"></h:inputText>
+                </p>
+
+                <!-- Type -->		
+                <p>Type:		
+                    <h:inputText id="type" label="type" size="32" value="#{itemController.type}"></h:inputText>
+                </p>
+
+                <!--  Avaliable Units-->		
+                <p>Avaliable Units:	
+                    <h:inputText id="avaliableUnits" label="avaliableUnits" size="32" disabled="true" value="#{itemController.type}"></h:inputText>
+                </p>
+
+                <!-- Price -->		
+                <p>Price:		
+                    <h:inputText id="price" label="price" size="32" value="#{itemController.price}"></h:inputText>
+                </p>
+
+                <p></p>
+
+                <h:commandButton styleClass="button" value="Search" action="#{itemController.searchItem()}"/>		
+                <h:commandButton styleClass="button" value="View" action="#{itemController.displayAllItems()}"/>
+
+                <h:dataTable value="#{itemController.itemWrapperList}" var="itemEntry"
+                             styleClass="orders" headerClass="ordersHeader" 
+                             rowClasses="evenColumn,oddColumn">
+                    <h:outputStylesheet name="css/table.css"/>
+                    <h:column>            
+                        <f:facet name="header">ID</f:facet>            
+                            #{itemEntry.itemId}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Title</f:facet>
+                            #{itemEntry.title}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Type</f:facet>
+                            #{itemEntry.type}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">AvailableUnits</f:facet>
+                            #{itemEntry.availableUnits}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Price</f:facet>
+                            #{itemEntry.price}
+                    </h:column>
+                    
+                    <h:column>
+                        <f:facet name="header">Action</f:facet>
+
+                        <h:commandLink value="ViewDetail" action="#{itemController.viewDetail(itemEntry)}" rendered="#{not itemEntry.editable}" />
+                    </h:column>
+                    
+                </h:dataTable>
+                
+                <h:dataTable value="#{itemController.itemWrapperList}" var="itemEntry"
+                             styleClass="orders" headerClass="ordersHeader" 
+                             rowClasses="evenColumn,oddColumn">
+                    <h:outputStylesheet name="css/table.css"/>
+                    <h:column>            
+                        <f:facet name="header">ID</f:facet>            
+                            #{itemEntry.itemId}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Title</f:facet>
+                            #{itemEntry.title}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Type</f:facet>
+                            #{itemEntry.type}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">AvailableUnits</f:facet>
+                            #{itemEntry.availableUnits}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Price</f:facet>
+                            #{itemEntry.price}
+                    </h:column>
+                    
+                    <h:column>
+                        <f:facet name="header">Action</f:facet>
+
+                        <h:commandLink value="ViewDetail" action="#{book.editAction}" rendered="#{not o.editable}" />
+                    </h:column>
+                    
+                </h:dataTable>
+                
+                
+            </h:form>
+        </article>		
+
+        <!-- Start Footer -->		
+        <footer>		
+            <p>This project created by Pan pingping</p>
+        </footer>		
+        <!-- End Footer	-->		
+    </h:body>
+
+
 </html>
 
