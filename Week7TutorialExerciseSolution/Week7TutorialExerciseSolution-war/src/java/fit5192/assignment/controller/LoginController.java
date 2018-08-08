@@ -37,12 +37,14 @@ public class LoginController {
 //                return Navigation.error.toString();
             }
             System.out.println("userEmail: "+userEmail+"login success");
+            
             // 创建session，将用户名和ActiveUser填进去
-            HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+                HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
             session.setAttribute("userEmail", userEmail);
             session.setAttribute("activeUser", activeUser);
+            
             // 跳转到 item.xhml页面
-            return Navigation.item.toString();
+            return Navigation.exchange.toString();
         } catch (Exception e) {
             e.printStackTrace();
             return Navigation.error.toString();

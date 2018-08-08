@@ -59,22 +59,22 @@
         <h:commandButton styleClass="button" value="Add" action="#{userController.addUser()}"/>
         <h:commandButton styleClass="button" value="Update" action="#{userController.updateUser()}"/>
         <h:commandButton styleClass="button" value="Delete" action="#{userController.deleteUser()}"/>
-        <h:commandButton styleClass="button" value="View" action="#{exchangeController.displayAllExchangesByuserId()}"/>   
-        <h:dataTable value="#{userController.userList}" var="userEntry"
+        <h:commandButton styleClass="button" value="ViewMyExchanges" action="#{exchangeController.displayAllExchangesByUserId()}"/>   
+        <h:dataTable value="#{exchangeController.exchangeList}" var="exchangeEntry"
                      styleClass="orders" headerClass="ordersHeader" 
                      rowClasses="evenColumn,oddColumn">
             <h:outputStylesheet name="css/table.css"/>
             <h:column>            
-                <f:facet name="header">User ID</f:facet>            
-                #{userEntry.userId}
+                <f:facet name="header">Exchange ID</f:facet>            
+                #{exchangeEntry.exchangeId}
             </h:column>
             <h:column>
-               <f:facet name="header">Last Name</f:facet>
-               #{userEntry.lastName}
+               <f:facet name="header">Exchange Time</f:facet>
+               #{exchangeEntry.exchangeId}
             </h:column>
-            <h:column>
+<!--            <h:column>
                <f:facet name="header">First Name</f:facet>
-               #{userEntry.firstName}
+               #{exchangeEntry}
             </h:column>
             <h:column>
                <f:facet name="header">Phone Number</f:facet>
@@ -83,7 +83,7 @@
             <h:column>
                <f:facet name="header">Email</f:facet>
                #{userEntry.email}
-            </h:column>
+            </h:column>-->
         </h:dataTable>
     </h:form>
 </article>		

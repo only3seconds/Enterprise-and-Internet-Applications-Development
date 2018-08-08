@@ -46,6 +46,11 @@ public class SysUser implements Serializable {
 
     public SysUser() {
     }
+    
+    public SysUser(int userId, String email) {
+        this.userId = userId;
+        this.email = email;
+    }
 
     public SysUser(int userId, String email, String password, String membershiLevel, String lastName, String firstName, String phoneNumber, double availableCredits) {
         this.userId = userId;

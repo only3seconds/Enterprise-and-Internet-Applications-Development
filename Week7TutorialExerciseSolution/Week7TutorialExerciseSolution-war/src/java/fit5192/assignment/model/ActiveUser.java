@@ -23,6 +23,12 @@ public class ActiveUser implements Serializable {
     public ActiveUser() {
         
     }
+    
+    public ActiveUser(int userId, String userEmail) {
+        this.userId = userId;
+        this.userEmial = userEmail;
+        
+    }
 
     public int getUserId() {
         return userId;
