@@ -26,10 +26,14 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "EXCHANGE")
 @NamedQueries({
-    @NamedQuery(name = "Exchange.findAll", query = "SELECT e FROM Exchange e")})
+    @NamedQuery(name = Exchange.GET_ALL_QUERY_NAME, query = "SELECT e FROM Exchange e"),
+    @NamedQuery(name = Exchange.FIND_BY_USERID, query = "SELECT e FROM Exchange e where e.sysUser.userId = :userId")})
 public class Exchange implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    public static final String GET_ALL_QUERY_NAME = "Exchange.findAll";
+    public static final String FIND_BY_USERID = "Exchange.findByUserId";
+    
     
     private Integer exchangeId;
     private Date exchangeTime;

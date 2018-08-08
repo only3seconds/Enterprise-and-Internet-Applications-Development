@@ -9,9 +9,9 @@ and open the template in the editor.
 */
 /*	Main	Sections	*/		
 html	{	background:	#EAEAEA;	}		
-body {	background: #FFF;	width: 960px;	margin: 0	auto;	font-family: sansserif;
+body {	background: #B8B8B8;	width: 1960px;	margin: 0	auto;	font-family: sansserif;
 padding-bottom: 5px;	}		
-header {	background: #9CF;	height: 40px;	padding: 20px;	}		
+header {	background: #D2691E;	height: 40px;	padding: 20px;	}		
 article	{	padding: 20px;	}		
 footer {	background: #EEE;	border: 1px	solid	#999;	margin: 5px	10px;	padding:
 0	10px;	}		

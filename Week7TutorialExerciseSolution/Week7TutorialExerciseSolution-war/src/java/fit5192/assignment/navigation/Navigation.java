@@ -5,8 +5,6 @@
  */
 package fit5192.assignment.navigation;
 
-import javax.xml.registry.infomodel.User;
-
 /**
  *
  * @author thinking
@@ -16,5 +14,6 @@ public enum Navigation {
     item,
     login,
     user,
-    error;
+    error,
+    exchange
 }

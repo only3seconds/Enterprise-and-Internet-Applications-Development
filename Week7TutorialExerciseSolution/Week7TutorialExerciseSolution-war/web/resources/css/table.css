@@ -1,0 +1,28 @@
+.orders {
+	border: thin black;
+}
+
+.ordersHeader {
+	text-align: center;
+	
+	color: black;
+	background: Peru;
+}
+
+.evenColumn {
+	height: 25px;
+	text-align: center;
+	background: PapayaWhip;
+}
+
+.oddColumn {
+	text-align: center;
+	background: PeachPuff;
+}
+
+.button {
+    text-align: center;
+    font-style: italic;
+    color: black;
+    background: ForestGreen;
+}

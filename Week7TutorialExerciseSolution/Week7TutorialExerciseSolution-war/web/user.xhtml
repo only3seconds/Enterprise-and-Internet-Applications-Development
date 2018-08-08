@@ -34,7 +34,7 @@
         <h:inputText id="password" label="password" size="32" value="#{userController.password}"></h:inputText>
         </p>
         <!-- MembershipLevel -->		
-        <p>MembershipLevel:	
+        <p>Membership Level:	
         <h:inputText id="membershipLevel" label="membershipLevel" size="32" value="#{userController.membershipLevel}"></h:inputText>
         </p>	
         <!-- Last Name -->		
@@ -61,22 +61,23 @@
         <h:commandButton styleClass="button" value="Delete" action="#{userController.deleteUser()}"/>
         <h:commandButton styleClass="button" value="View" action="#{userController.displayAllUsers()}"/>    
         <h:dataTable value="#{userController.userList}" var="userEntry"
-                     styleClass="userTable" headerClass="user-table-header" 
-                     rowClasses="user-table-odd-row,user-table-even-row">
+                     styleClass="orders" headerClass="ordersHeader" 
+                     rowClasses="evenColumn,oddColumn">
+            <h:outputStylesheet name="css/table.css"/>
             <h:column>            
-                <f:facet name="header">userId</f:facet>            
+                <f:facet name="header">User ID</f:facet>            
                 #{userEntry.userId}
             </h:column>
             <h:column>
-               <f:facet name="header">lastName</f:facet>
+               <f:facet name="header">Last Name</f:facet>
                #{userEntry.lastName}
             </h:column>
             <h:column>
-               <f:facet name="header">firstName</f:facet>
+               <f:facet name="header">First Name</f:facet>
                #{userEntry.firstName}
             </h:column>
             <h:column>
-               <f:facet name="header">PhoneNumber</f:facet>
+               <f:facet name="header">Phone Number</f:facet>
                #{userEntry.phoneNumber}
             </h:column>
             <h:column>

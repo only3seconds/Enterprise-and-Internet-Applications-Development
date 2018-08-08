@@ -22,32 +22,39 @@
     
     <h:form>
         <!-- Item ID -->		
-        <p>Item ID:</p>		
-        <h:inputText id="itemID" label="id" size="32" disabled="true" value="#{itemController.title}">
-        </h:inputText>	
+        <p>Item ID:		
+        <h:inputText id="itemID" label="id" size="32" disabled="true" value="#{itemController.title}"></h:inputText>
+        </p>
+        
         <!-- Title -->		
-        <p>Title :</p>		
-        <h:inputText id="title" label="title" size="32" value="#{itemController.title}">
-        </h:inputText>	
+        <p>Title :		
+        <h:inputText id="title" label="title" size="32" value="#{itemController.title}"></h:inputText>
+        </p>
+        
         <!-- Type -->		
-        <p>Type:</p>		
-        <h:inputText id="type" label="type" size="32" value="#{itemController.type}">
-        </h:inputText>	
+        <p>Type:		
+        <h:inputText id="type" label="type" size="32" value="#{itemController.type}"></h:inputText>
+        </p>
+        
         <!--  Avaliable Units-->		
-        <p>Avaliable Units:</p>		
-        <h:inputText id="avaliableUnits" label="avaliableUnits" size="32" disabled="true" value="#{itemController.type}">
-        </h:inputText>	
+        <p>Avaliable Units:	
+        <h:inputText id="avaliableUnits" label="avaliableUnits" size="32" disabled="true" value="#{itemController.type}"></h:inputText>
+        </p>
+        
         <!-- Price -->		
-        <p>Price:</p>		
-        <h:inputText id="price" label="price" size="32" value="#{itemController.price}">
-        </h:inputText>	
+        <p>Price:		
+        <h:inputText id="price" label="price" size="32" value="#{itemController.price}"></h:inputText>
+        </p>
+        
         <p></p>
+        
         <h:commandButton styleClass="button" value="Search" action="#{itemController.searchItem()}"/>		
-        <h:commandButton styleClass="button" value="View" action="#{itemController.displayAllItems()}"/>		
-        <h:commandButton styleClass="button" value="Close" action="response"/>
+        <h:commandButton styleClass="button" value="View" action="#{itemController.displayAllItems()}"/>
+        
         <h:dataTable value="#{itemController.itemWrapperList}" var="itemEntry"
-                     styleClass="itemTable" headerClass="item-table-header" 
-                     rowClasses="item-table-odd-row,item-table-even-row">
+                     styleClass="orders" headerClass="ordersHeader" 
+                     rowClasses="evenColumn,oddColumn">
+            <h:outputStylesheet name="css/table.css"/>
             <h:column>            
                 <f:facet name="header">ID</f:facet>            
                 #{itemEntry.itemId}

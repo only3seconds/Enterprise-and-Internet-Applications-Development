@@ -5,6 +5,8 @@
  */
 package fit5042.tutex.repository;
 
+import fit5042.tutex.repository.entities.Exchange;
+import java.util.List;
 import javax.ejb.Remote;
 
 /**
@@ -13,5 +15,12 @@ import javax.ejb.Remote;
  */
 @Remote
 public interface ExchangeOperation {
-    public void addOrderWithSingleType();
+    
+    public List<Exchange> getAllExchangesByUserId(int userId) throws Exception;
+    
+    
+    
+   
+    
+
 }
