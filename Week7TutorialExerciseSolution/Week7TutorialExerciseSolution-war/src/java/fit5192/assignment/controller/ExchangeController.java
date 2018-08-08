@@ -18,7 +18,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
-import org.jboss.weld.servlet.SessionHolder;
 
 /**
  *
@@ -33,20 +32,16 @@ public class ExchangeController implements Serializable {
     
     private List<Exchange> exchangeList;
     
-    
-    
     @EJB
     private ExchangeOperation exchangeOperation;
+    @EJB
     private UserOperation userOperation;
-    
-    
-    
     
     public String displayAllExchangesByUserId() {
         try {
             HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
             int userId = ((ActiveUser)session.getAttribute("activeUser")).getUserId();
-
+            System.out.println("thinking"+userId);
             exchangeList = exchangeOperation.getAllExchangesByUserId(userId);
             
             return Navigation.exchange.toString();
@@ -60,7 +55,7 @@ public class ExchangeController implements Serializable {
     public String addSubOrder() {
         try {
             //sysUser = 登录进去的activeUser
-            HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
             sysUser = (SysUser) session.getAttribute("activeUser");
             exchangeList = exchangeOperation.getAllExchangesByUserId(sysUser.getUserId());
             
@@ -119,7 +114,4 @@ public class ExchangeController implements Serializable {
     public void setExchangeOperation(ExchangeOperation exchangeOperation) {
         this.exchangeOperation = exchangeOperation;
     }
-    
-    
-    
 }
