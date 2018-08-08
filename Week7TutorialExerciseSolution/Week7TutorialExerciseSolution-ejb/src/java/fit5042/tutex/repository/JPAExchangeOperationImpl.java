@@ -6,7 +6,11 @@
 package fit5042.tutex.repository;
 
 import fit5042.tutex.repository.entities.Exchange;
+import fit5042.tutex.repository.entities.Item;
+import fit5042.tutex.repository.entities.SysUser;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -23,8 +27,9 @@ public class JPAExchangeOperationImpl implements ExchangeOperation {
 
     @Override
     public List<Exchange> getAllExchangesByUserId(int userId) throws Exception {
-        return entityManager.createNamedQuery(Exchange.FIND_BY_USERID).getResultList();
-    }
 
-    
+        List<Exchange> exchanges =  entityManager.createNamedQuery(Exchange.FIND_BY_USERID, Exchange.class).setParameter("userId", userId).getResultList();
+        System.out.println(exchanges);
+        return exchanges;
+    }
 }
