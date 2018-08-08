@@ -11,7 +11,6 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -27,7 +26,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "EXCHANGE")
 @NamedQueries({
     @NamedQuery(name = Exchange.GET_ALL_QUERY_NAME, query = "SELECT e FROM Exchange e"),
-    @NamedQuery(name = Exchange.FIND_BY_USERID, query = "SELECT e FROM Exchange e where e.sysUser.userId = :userId")})
+    @NamedQuery(name = Exchange.FIND_BY_USERID, query = "SELECT e FROM Exchange e where e.sysuserSysUserId = :userId")})
 public class Exchange implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,15 +37,15 @@ public class Exchange implements Serializable {
     private Integer exchangeId;
     private Date exchangeTime;
     private Double netProceeds;
-    private SysUser sysUser;
+    private int sysuserSysUerId;
 
     public Exchange() {
     }
 
-    public Exchange(Integer exchangeId, Date exchangeTime, SysUser sysUser) {
+    public Exchange(Integer exchangeId, Date exchangeTime, int sysuserSysUerId) {
         this.exchangeId = exchangeId;
         this.exchangeTime = exchangeTime;
-        this.sysUser =sysUser;
+        this.sysuserSysUerId =sysuserSysUerId;
     }
 
     @Id
@@ -79,17 +78,15 @@ public class Exchange implements Serializable {
     public void setNetProceeds(Double netProceeds) {
         this.netProceeds = netProceeds;
     }
-
-    @ManyToOne
-    public SysUser getSysUser() {
-        return sysUser;
-    }
-
-    public void setSysUser(SysUser sysUser) {
-        this.sysUser = sysUser;
+    
+    @Column(name = "SYSUSER_SYS_USER_ID")
+    public int getSysuserSysUserId() {
+        return sysuserSysUerId;
     }
     
-    
+    public void setSysuserSysUserId(int userId) {
+        this.sysuserSysUerId = userId;
+    }
 
     @Override
     public int hashCode() {
@@ -113,7 +110,6 @@ public class Exchange implements Serializable {
 
     @Override
     public String toString() {
-        return "exchangeId= " + exchangeId + ", userId= " + sysUser.getUserId();
+        return "Exchange{" + "exchangeId=" + exchangeId + ", exchangeTime=" + exchangeTime + ", netProceeds=" + netProceeds + ", sysuserSysUerId=" + sysuserSysUerId + '}';
     }
-    
 }
