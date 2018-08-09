@@ -113,9 +113,9 @@ public class ItemController implements Serializable {
     //View Detail
     public String viewDetail(ItemWrapper itemWrapper) {
         try {
-            Item item =  itemRepository.searchItemById(itemWrapper.getItemId());
+            Item item =  itemRepository.searchItemByTitle(itemWrapper.getTitle());
             //System.out.println("total = " + item.getTotalNumberInCirculation());
-            //System.out.println("label = " + item.getLabels().toString());
+//            System.out.println("label = " + item.getLabels());
             itemW = new ItemWrapper(item.getItemId(), item.getTitle(), item.getImageURL(), item.getNumberInStore(), item.getTotalNumberInCirculation(), item.getPerPrice(), item.getLabels().toString());
             
             return Navigation.item.toString();
