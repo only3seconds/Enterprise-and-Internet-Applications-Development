@@ -63,6 +63,7 @@ public class JPAItemRepositoryImpl implements ItemRepository{
     public Item searchItemById(int itemId) throws Exception {
         Item item = entityManager.createNamedQuery(Item.FIND_BY_ID, Item.class)
                 .setParameter("itemId", itemId).getSingleResult();
+        System.out.println("label = " + item.getLabels().toString());//没找到label
         return item;
     }
     

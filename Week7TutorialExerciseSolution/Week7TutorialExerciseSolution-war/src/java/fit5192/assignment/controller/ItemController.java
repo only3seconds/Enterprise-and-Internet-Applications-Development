@@ -30,8 +30,7 @@ public class ItemController implements Serializable {
     private double price;
 
     private List<ItemWrapper> itemWrapperList;
-    private Item item;
-    private String labels;
+    private ItemWrapper itemW;
     
     @EJB
     private ItemRepository itemRepository;
@@ -41,7 +40,7 @@ public class ItemController implements Serializable {
      */
     public ItemController() {
         itemWrapperList = new ArrayList<>();
-        item = new Item();
+        itemW = new ItemWrapper();
     }
     
     //Search
@@ -114,13 +113,15 @@ public class ItemController implements Serializable {
     //View Detail
     public String viewDetail(ItemWrapper itemWrapper) {
         try {
-            item =  itemRepository.searchItemById(itemWrapper.getItemId());
-            labels = item.getLabels().toString();
-            System.out.println("total = " + item.getTotalNumberInCirculation());
+            Item item =  itemRepository.searchItemById(itemWrapper.getItemId());
+            //System.out.println("total = " + item.getTotalNumberInCirculation());
+            //System.out.println("label = " + item.getLabels().toString());
+            itemW = new ItemWrapper(item.getItemId(), item.getTitle(), item.getImageURL(), item.getNumberInStore(), item.getTotalNumberInCirculation(), item.getPerPrice(), item.getLabels().toString());
+            
             return Navigation.item.toString();
         } catch (Exception ex) {
             ex.printStackTrace();
-            return Navigation.item.toString();
+            return null;
         }
         
     } 
@@ -157,14 +158,6 @@ public class ItemController implements Serializable {
         this.itemWrapperList = itemList;
     }
 
-    public Item getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
-    }
-
     
     public ItemRepository getItemRepository() {
         return itemRepository;
@@ -174,13 +167,12 @@ public class ItemController implements Serializable {
         this.itemRepository = itemRepository;
     }
 
-    public String getLabels() {
-        return labels;
+    public ItemWrapper getItemWrapper() {
+        return itemW;
     }
 
-    public void setLabels(String labels) {
-        this.labels = labels;
+    public void setItemWrapper(ItemWrapper itemWrapper) {
+        this.itemW = itemWrapper;
     }
-    
-    
+     
 }

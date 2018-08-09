@@ -85,38 +85,38 @@
                 </h:dataTable>
 
 
-                <h:dataTable value="#{itemController.item}"
+                <h:dataTable value="#{itemController.itemWrapper}"
                              styleClass="orders" headerClass="ordersHeader" >
                     <h:outputStylesheet name="css/table.css"/>
                     <h:column>            
                         <f:facet name="header">ID</f:facet>            
-                        #{itemController.item.itemId}"}
+                        #{itemController.itemWrapper.itemId}
                     </h:column>
                     <h:column>
                         <f:facet name="header">Title</f:facet>
-                        #{itemController.item.title}"}
+                        #{itemController.itemWrapper.title}
                     </h:column>
                     <h:column>
                         <f:facet name="header">ImageURL</f:facet>
-                            #{itemController.item.imageURL}
+                            #{itemController.itemWrapper.imageURL}
                     </h:column>
                     <h:column>
                         <f:facet name="header">NumberInStore</f:facet>
-                            #{itemController.item.numberInStore}
+                            #{itemController.itemWrapper.availableUnits}
                     </h:column>
                     <h:column>
                         <f:facet name="header">TotalNumberInCirculation</f:facet>
-                            #{itemController.item.totalNumberInCirculation}
+                            #{itemController.itemWrapper.totalNumberInCirculation}
                     </h:column>
 
                     <h:column>
                         <f:facet name="header">Per Price</f:facet>
-                            #{itemController.item.perPrice}
+                            #{itemController.itemWrapper.price}
                     </h:column>
 
                     Ï<h:column>
                         <f:facet name="header">Labels</f:facet>
-                            #{itemController.labels}
+                            #{itemController.itemWrapper.type}
                     </h:column>
 
 

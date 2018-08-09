@@ -12,10 +12,12 @@ package fit5192.assignment.model;
 public class ItemWrapper {
     private int itemId;
     private String title;
-    private String type;
+    private String imageURL;
     private int availableUnits;
+    private int totalNumberInCirculation;
     private double price;
-    
+    private String type;
+     
     public ItemWrapper() {
         
     }
@@ -28,6 +30,17 @@ public class ItemWrapper {
         this.price = price;
         
     }
+    
+    public ItemWrapper(int itemId, String title, String imageURL, int availableUnits, int totalNumberInCirculation, double price, String type) {
+        this.itemId = itemId;
+        this.title = title;
+        this.imageURL= imageURL;
+        this.availableUnits = availableUnits;
+        this.totalNumberInCirculation = totalNumberInCirculation;
+        this.price = price;
+        this.type = type;    
+    }
+    
 
     public int getItemId() {
         return itemId;
@@ -67,6 +80,22 @@ public class ItemWrapper {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
+    public int getTotalNumberInCirculation() {
+        return totalNumberInCirculation;
+    }
+
+    public void setTotalNumberInCirculation(int totalNumberInCirculation) {
+        this.totalNumberInCirculation = totalNumberInCirculation;
     }
     
     
