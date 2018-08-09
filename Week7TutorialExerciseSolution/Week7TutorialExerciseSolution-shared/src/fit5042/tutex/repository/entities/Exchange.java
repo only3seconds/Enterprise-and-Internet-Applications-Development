@@ -10,6 +10,7 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -53,6 +54,7 @@ public class Exchange implements Serializable {
 
     @Id
     @Basic(optional = false)
+    @GeneratedValue
     @NotNull
     @Column(name = "EXCHANGE_ID")
     public Integer getExchangeId() {

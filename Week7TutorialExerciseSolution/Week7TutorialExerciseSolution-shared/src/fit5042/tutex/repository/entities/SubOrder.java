@@ -39,7 +39,7 @@ public class SubOrder implements Serializable {
     public SubOrder() {
     }
 
-    public SubOrder(Integer orderId, int exchangeId, int itemId, Integer itemsCount) {
+    public SubOrder(int exchangeId, int itemId, Integer itemsCount) {
         this.orderId = orderId;
         this.exchangeId = exchangeId;
         this.itemId = itemId;

@@ -78,37 +78,37 @@
                 
                 <!-- 加入到购物车 -->		
                 <h:commandButton styleClass="button" value="View Cart" action="#{exchangeController.viewCart()}"/>
-                <h:dataTable value="#{exchangeController.chartList}" var="chartItem"
+                <h:dataTable value="#{exchangeController.chartList}" var="cartItem"
                              styleClass="orders" headerClass="ordersHeader" 
                              rowClasses="evenColumn,oddColumn">
                     <h:outputStylesheet name="css/table.css"/>
                     <h:column>            
                         <f:facet name="header">ID</f:facet>            
-                            #{chartItem.itemId}
+                            #{cartItem.itemId}
                     </h:column>
                     <h:column>
                         <f:facet name="header">Title</f:facet>
-                            #{chartItem.title}
+                            #{cartItem.title}
                     </h:column>
                     <h:column>
                         <f:facet name="header">ImageURL</f:facet>
-                            #{chartItem.imageURL}
+                            #{cartItem.imageURL}
                     </h:column>
                     <h:column>
                         <f:facet name="header">AvailableUnits</f:facet>
-                            #{chartItem.availableUnits}
+                            #{cartItem.availableUnits}
                     </h:column>
                      <h:column>
                         <f:facet name="header">TotalNumberInCirculation</f:facet>
-                            #{chartItem.totalNumberInCirculation}
+                            #{cartItem.totalNumberInCirculation}
                     </h:column>
                     <h:column>
                         <f:facet name="header">Price</f:facet>
-                            #{chartItem.price}
+                            #{cartItem.price}
                     </h:column>
                      <h:column>
                         <f:facet name="header">Type</f:facet>
-                            #{chartItem.type}
+                            #{cartItem.type}
                     </h:column>
 
                     <h:column>
@@ -132,18 +132,10 @@
                         <f:facet name="header">Exchange Time</f:facet>
                             #{exchangeEntry.exchangeTime}
                     </h:column>
-                    <!--            <h:column>
-                                   <f:facet name="header">First Name</f:facet>
-                    #{exchangeEntry}
-                 </h:column>
-                 <h:column>
-                    <f:facet name="header">Phone Number</f:facet>
-                    #{userEntry.phoneNumber}
-                 </h:column>
-                 <h:column>
-                    <f:facet name="header">Email</f:facet>
-                    #{userEntry.email}
-                 </h:column>-->
+                    <h:column>
+                        <f:facet name="header">UserId</f:facet>
+                            #{exchangeEntry.sysuserSysUserId}
+                    </h:column>
                 </h:dataTable>
             </h:form>
         </article>		

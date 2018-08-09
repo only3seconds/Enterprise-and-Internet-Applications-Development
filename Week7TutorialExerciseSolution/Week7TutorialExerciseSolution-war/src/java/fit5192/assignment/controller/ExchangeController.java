@@ -71,14 +71,15 @@ public class ExchangeController implements Serializable {
         try {
             HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
             int userId = ((ActiveUser)session.getAttribute("activeUser")).getUserId();
-            
             exchange = new Exchange(userId);
-            exchangeId = exchange.getExchangeId();
-            subOrder = new SubOrder(exchangeId, cartItem.getItemId());//创建一下构造函数
+            exchange.setExchangeTime(new Date());
+            int exchangeId = exchangeOperation.insertExchange(exchange);
+            exchange.setExchangeId(exchangeId);
             
-            exchangeOperation.addExchange(exchange);
-            exchangeOperation.addSubOrder(subOrder);
-            
+            subOrder = new SubOrder(exchange.getExchangeId(),cartItem.getItemId(), 1);//创建一下构造函数
+            exchangeOperation.insertSubOrder(Arrays.asList(subOrder));
+            System.out.println("thinking: "+exchange);
+            System.out.println("thinking_fioa: "+subOrder);
             return Navigation.exchange.toString();
             
         } catch (Exception ex) {
@@ -154,7 +155,6 @@ public class ExchangeController implements Serializable {
     
     //Add to chart
     public String addToChart(ItemWrapper i) {
-        System.out.println("Hello");
         chartList.add(i);
         System.out.println("size = " + chartList.size());
         return Navigation.exchange.toString();
