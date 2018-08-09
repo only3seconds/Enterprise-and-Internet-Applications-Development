@@ -6,6 +6,7 @@
 package fit5042.tutex.repository;
 
 import fit5042.tutex.repository.entities.Exchange;
+import fit5042.tutex.repository.entities.SubOrder;
 import java.util.List;
 import javax.ejb.Remote;
 
@@ -19,8 +20,8 @@ public interface ExchangeOperation {
     public List<Exchange> getAllExchangesByUserId(int userId) throws Exception;
     
     
+    public void insertSubOrder(List<SubOrder> orderList);
     
-   
-    
+    public int insertExchange(Exchange exchange);
 
 }

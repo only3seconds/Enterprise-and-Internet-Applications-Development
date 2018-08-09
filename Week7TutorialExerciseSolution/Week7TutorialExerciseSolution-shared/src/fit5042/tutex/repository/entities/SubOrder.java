@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -32,22 +33,22 @@ public class SubOrder implements Serializable {
     private Integer itemsCount;
     private int purchaseOrSale;
     
-    private Exchange exchange;
-    private Item item;
+    private int exchangeId;
+    private int itemId;
 
     public SubOrder() {
     }
 
-    
-    public SubOrder(Integer orderId, Exchange exchange, Item item, Integer itemsCount) {
+    public SubOrder(Integer orderId, int exchangeId, int itemId, Integer itemsCount) {
         this.orderId = orderId;
-        this.exchange = exchange;
-        this.item = item;
+        this.exchangeId = exchangeId;
+        this.itemId = itemId;
         this.itemsCount = itemsCount;
     }
 
     @Id
     @Basic(optional = false)
+    @GeneratedValue
     @NotNull
     @Column(name = "order_id")
     public Integer getOrderId() {
@@ -76,50 +77,28 @@ public class SubOrder implements Serializable {
         this.purchaseOrSale = purchaseOrSale;
     }
 
-    
-    @ManyToOne
-    public Exchange getExchange() {
-        return exchange;
+    @Column(name = "EXCHANGE_EXCHANGE_ID")
+    public int getExchangeId() {
+        return exchangeId;
     }
 
-    public void setExchange(Exchange exchange) {
-        this.exchange = exchange;
+    public void setExchangeId(int exchangeId) {
+        this.exchangeId = exchangeId;
     }
 
-    @ManyToOne
-    public Item getItem() {
-        return item;
+    @Column(name = "ITEM_ITEM_ID")
+    public int getItemId() {
+        return itemId;
     }
 
-    public void setItem(Item item) {
-        this.item = item;
-    }
-    
-    
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (orderId != null ? orderId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof SubOrder)) {
-            return false;
-        }
-        SubOrder other = (SubOrder) object;
-        if ((this.orderId == null && other.orderId != null) || (this.orderId != null && !this.orderId.equals(other.orderId))) {
-            return false;
-        }
-        return true;
+    public void setItemId(int itemId) {
+        this.itemId = itemId;
     }
 
     @Override
     public String toString() {
-        return "exchangeId= " + orderId + ", itemId=" + item.getItemId() + ", exchangeId= " + exchange.getExchangeId();
+        return "SubOrder{" + "orderId=" + orderId + ", itemsCount=" + itemsCount + ", purchaseOrSale=" + purchaseOrSale + ", exchangeId=" + exchangeId + ", itemId=" + itemId + '}';
     }
+    
     
 }
