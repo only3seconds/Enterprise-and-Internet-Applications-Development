@@ -42,6 +42,9 @@ public class Exchange implements Serializable {
     public Exchange() {
     }
 
+    public Exchange(int sysuserSysUerId) {
+        this.sysuserSysUerId = sysuserSysUerId;
+    }
     public Exchange(Integer exchangeId, Date exchangeTime, int sysuserSysUerId) {
         this.exchangeId = exchangeId;
         this.exchangeTime = exchangeTime;

@@ -10,6 +10,7 @@ import fit5042.tutex.repository.ItemRepository;
 import fit5042.tutex.repository.UserOperation;
 import fit5042.tutex.repository.entities.Exchange;
 import fit5042.tutex.repository.entities.Item;
+import fit5042.tutex.repository.entities.SubOrder;
 import fit5042.tutex.repository.entities.SysUser;
 import fit5192.assignment.model.ActiveUser;
 import fit5192.assignment.model.ItemWrapper;
@@ -48,6 +49,10 @@ public class ExchangeController implements Serializable {
     private List<ItemWrapper> itemWrapperList;
     private static List<ItemWrapper> chartList;
     
+    
+    private Exchange exchange;
+    private SubOrder subOrder;
+    
     @EJB
     private ExchangeOperation exchangeOperation;
 //    @EJB
@@ -60,6 +65,26 @@ public class ExchangeController implements Serializable {
     public ExchangeController() {
         itemWrapperList = new ArrayList<>();
         chartList = new ArrayList<>();
+    }
+    
+    public String addExchange(ItemWrapper cartItem) {
+        try {
+            HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            int userId = ((ActiveUser)session.getAttribute("activeUser")).getUserId();
+            
+            exchange = new Exchange(userId);
+            exchangeId = exchange.getExchangeId();
+            subOrder = new SubOrder(exchangeId, cartItem.getItemId());//创建一下构造函数
+            
+            exchangeOperation.addExchange(exchange);
+            exchangeOperation.addSubOrder(subOrder);
+            
+            return Navigation.exchange.toString();
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return Navigation.exchange.toString();
+        }
     }
     
     public String displayAllExchangesByUserId() {
@@ -231,6 +256,24 @@ public class ExchangeController implements Serializable {
     public void setChartList(List<ItemWrapper> chartList) {
         this.chartList = chartList;
     }
+
+    public Exchange getExchange() {
+        return exchange;
+    }
+
+    public void setExchange(Exchange exchange) {
+        this.exchange = exchange;
+    }
+
+    public SubOrder getSubOrder() {
+        return subOrder;
+    }
+
+    public void setSubOrder(SubOrder subOrder) {
+        this.subOrder = subOrder;
+    }
+    
+    
     
     
     

@@ -38,6 +38,7 @@ public class SubOrder implements Serializable {
     public SubOrder() {
     }
 
+    
     public SubOrder(Integer orderId, Exchange exchange, Item item, Integer itemsCount) {
         this.orderId = orderId;
         this.exchange = exchange;
