@@ -44,7 +44,7 @@ public class LoginController {
             session.setAttribute("activeUser", activeUser);
             
             // 跳转到 item.xhml页面
-            return Navigation.exchange.toString();
+            return Navigation.item.toString();
         } catch (Exception e) {
             e.printStackTrace();
             return Navigation.error.toString();

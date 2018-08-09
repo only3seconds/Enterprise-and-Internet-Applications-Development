@@ -19,13 +19,15 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
     @NamedQuery(name = Item.GET_ALL_QUERY_NAME, query = "SELECT DISTINCT i FROM Item i left join fetch i.labels"),
     @NamedQuery(name = Item.FIND_BY_TITLE, query = "SELECT DISTINCT i FROM Item i left join fetch i.labels where i.title = :title"),
-    @NamedQuery(name = Item.SEARCH_BY_LABEL, query = "SELECT DISTINCT i FROM Item i LEFT JOIN FETCH i.labels where i.labels = :labels")
+    @NamedQuery(name = Item.SEARCH_BY_LABEL, query = "SELECT DISTINCT i FROM Item i LEFT JOIN FETCH i.labels where i.labels = :labels"),
+    @NamedQuery(name = Item.FIND_BY_ID, query = "SELECT DISTINCT i FROM Item i left join fetch i.labels where i.itemId = :itemId"),
 })
 public class Item implements Serializable {
     
     public static final String GET_ALL_QUERY_NAME = "Item.getAll";
     public static final String FIND_BY_TITLE = "Item.findByTitle";
     public static final String SEARCH_BY_LABEL = "Item.searchByLabel";
+    public static final String FIND_BY_ID = "Item.searchById";
     
     private int itemId; 
     private String title;

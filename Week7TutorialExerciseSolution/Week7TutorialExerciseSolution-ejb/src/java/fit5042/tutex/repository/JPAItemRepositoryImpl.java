@@ -58,5 +58,12 @@ public class JPAItemRepositoryImpl implements ItemRepository{
     public List<Item> getAllItems() throws Exception {
         return entityManager.createNamedQuery(Item.GET_ALL_QUERY_NAME).getResultList();
     }
+
+    @Override
+    public Item searchItemById(int itemId) throws Exception {
+        Item item = entityManager.createNamedQuery(Item.FIND_BY_ID, Item.class)
+                .setParameter("itemId", itemId).getSingleResult();
+        return item;
+    }
     
 }

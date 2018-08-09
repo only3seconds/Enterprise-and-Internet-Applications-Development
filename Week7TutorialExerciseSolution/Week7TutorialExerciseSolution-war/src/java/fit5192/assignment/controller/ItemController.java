@@ -15,12 +15,14 @@ import java.util.Arrays;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 /**
  *
  * @author thinking
  */
 @ManagedBean(name = "itemController")
+@SessionScoped
 public class ItemController implements Serializable {
     
     private String title;
@@ -29,6 +31,7 @@ public class ItemController implements Serializable {
 
     private List<ItemWrapper> itemWrapperList;
     private Item item;
+    private String labels;
     
     @EJB
     private ItemRepository itemRepository;
@@ -38,11 +41,12 @@ public class ItemController implements Serializable {
      */
     public ItemController() {
         itemWrapperList = new ArrayList<>();
+        item = new Item();
     }
     
     //Search
     public String searchItem() {
-        
+        itemWrapperList.clear();
         List<Item> itemList = new ArrayList<>();
         if(null != title && !title.isEmpty()) {
             itemList = this.searchItemByTitle(title);
@@ -93,6 +97,7 @@ public class ItemController implements Serializable {
     //View
     public String displayAllItems() {
         try {
+            itemWrapperList.clear();
             List<Item> itemList = itemRepository.getAllItems();
             for(Item i : itemList) {
                 ItemWrapper itemWrapper = new ItemWrapper(i.getItemId(), i.getTitle(), i.getLabels().toString(), i.getNumberInStore(), i.getPerPrice());
@@ -107,9 +112,18 @@ public class ItemController implements Serializable {
     }
 
     //View Detail
-    public void viewDetail() {
+    public String viewDetail(ItemWrapper itemWrapper) {
+        try {
+            item =  itemRepository.searchItemById(itemWrapper.getItemId());
+            labels = item.getLabels().toString();
+            System.out.println("total = " + item.getTotalNumberInCirculation());
+            return Navigation.item.toString();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return Navigation.item.toString();
+        }
         
-    }
+    } 
     
     public String getTitle() {
         return title;
@@ -143,6 +157,15 @@ public class ItemController implements Serializable {
         this.itemWrapperList = itemList;
     }
 
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
+    
     public ItemRepository getItemRepository() {
         return itemRepository;
     }
@@ -150,4 +173,14 @@ public class ItemController implements Serializable {
     public void setItemRepository(ItemRepository itemRepository) {
         this.itemRepository = itemRepository;
     }
+
+    public String getLabels() {
+        return labels;
+    }
+
+    public void setLabels(String labels) {
+        this.labels = labels;
+    }
+    
+    
 }

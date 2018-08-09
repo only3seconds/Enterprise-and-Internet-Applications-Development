@@ -12,6 +12,8 @@ public interface ItemRepository {
 
     public Item searchItemByTitle(String title) throws Exception;
     
+    public Item searchItemById(int itemId) throws Exception;
+    
     public List<Item> searchItemByType(String type) throws Exception;
     
     public List<Item> searchItemByPrice(double price) throws Exception;
