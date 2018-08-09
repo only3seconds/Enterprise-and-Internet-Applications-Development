@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -29,6 +30,7 @@ import javax.servlet.http.HttpSession;
  * @author thinking
  */
 @ManagedBean(name = "exchangeController")
+@SessionScoped
 public class ExchangeController implements Serializable {
     private int exchangeId;
     private Date exchangeTime;
@@ -127,10 +129,10 @@ public class ExchangeController implements Serializable {
     
     //Add to chart
     public String addToChart(ItemWrapper i) {
-        //System.out.println("Hello");打印不出来，好奇怪
+        System.out.println("Hello");
         chartList.add(i);
         System.out.println("size = " + chartList.size());
-        return Navigation.item.toString();
+        return Navigation.exchange.toString();
     }
     
 
