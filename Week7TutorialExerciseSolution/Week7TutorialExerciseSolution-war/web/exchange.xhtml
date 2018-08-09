@@ -3,97 +3,157 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    
-<h:head>
-    <h:outputStylesheet name="css/style.css"/>
-<title>User - Home</title>	
-</h:head>
-    
-<h:body>		
-	
-<header>		
-    <h1>Exchange Operation</h1>	
-</header>		
-		
-<!-- Start Article -->		
-<article>		
-    <h2>View Add Exchanges</h2>		
-    <hr	/>
-    
-    <h:form>
-        <!-- User ID -->		
-        <p>User ID:		
-        <h:inputText id="userID" label="userID" size="32"  value="#{userController.userId}"></h:inputText>
-        </p>
-        <!-- Email -->		
-        <p>Email:		
-        <h:inputText id="email" label="email" size="32" value="#{userController.email}"></h:inputText>
-        </p>
-        <!-- Password -->		
-        <p>Password:		
-        <h:inputText id="password" label="password" size="32" value="#{userController.password}"></h:inputText>
-        </p>
-        <!-- MembershipLevel -->		
-        <p>Membership Level:	
-        <h:inputText id="membershipLevel" label="membershipLevel" size="32" value="#{userController.membershipLevel}"></h:inputText>
-        </p>	
-        <!-- Last Name -->		
-        <p>Last Name :		
-        <h:inputText id="lastName" label="lastName" size="32" value="#{userController.lastName}"></h:inputText>
-        </p>
-        <!-- First Name -->		
-        <p>First Name:		
-        <h:inputText id="firstName" label="firstName" size="32" value="#{userController.firstName}"></h:inputText>
-        </p>
-        <!--  Phone Number-->		
-        <p>Phone Number		
-        <h:inputText id="phoneNumber" label="phoneNumber" size="32" value="#{userController.phoneNumber}"></h:inputText>
-        </p>
-        <!-- Available Credits -->		
-        <p>Available Credits:		
-        <h:inputText id="availableCredits" label="availableCredits" size="32" value="#{userController.availableCredits}"></h:inputText>	
-        </p>
-             
-        <p></p>		
-        <h:commandButton styleClass="button" value="Search" action="#{userController.searchUser()}"/>		
-        <h:commandButton styleClass="button" value="Add" action="#{userController.addUser()}"/>
-        <h:commandButton styleClass="button" value="Update" action="#{userController.updateUser()}"/>
-        <h:commandButton styleClass="button" value="Delete" action="#{userController.deleteUser()}"/>
-        <h:commandButton styleClass="button" value="ViewMyExchanges" action="#{exchangeController.displayAllExchangesByUserId()}"/>   
-        <h:dataTable value="#{exchangeController.exchangeList}" var="exchangeEntry"
-                     styleClass="orders" headerClass="ordersHeader" 
-                     rowClasses="evenColumn,oddColumn">
-            <h:outputStylesheet name="css/table.css"/>
-            <h:column>            
-                <f:facet name="header">Exchange ID</f:facet>            
-                #{exchangeEntry.exchangeId}
-            </h:column>
-            <h:column>
-               <f:facet name="header">Exchange Time</f:facet>
-               #{exchangeEntry.exchangeTime}
-            </h:column>
-<!--            <h:column>
-               <f:facet name="header">First Name</f:facet>
-               #{exchangeEntry}
-            </h:column>
-            <h:column>
-               <f:facet name="header">Phone Number</f:facet>
-               #{userEntry.phoneNumber}
-            </h:column>
-            <h:column>
-               <f:facet name="header">Email</f:facet>
-               #{userEntry.email}
-            </h:column>-->
-        </h:dataTable>
-    </h:form>
-</article>		
 
-<!-- Start Footer -->		
-<footer>		
-    <p>This project created by Pan Pingping</p>
-</footer>		
-<!-- End Footer	-->		
-</h:body>
-    
-    
+    <h:head>
+        <h:outputStylesheet name="css/style.css"/>
+        <title>User - Home</title>	
+    </h:head>
+
+    <h:body>		
+
+        <header>		
+            <h1>Exchange Operation</h1>	
+        </header>		
+
+        <!-- Start Article -->		
+        <article>		
+            <h2>View Add Exchanges</h2>		
+            <hr	/>
+
+            <h:form>
+                <h:commandButton styleClass="button" value="Search Items" action="#{exchangeController.searchItem()}"/>
+                <p></p>
+                <!-- Title -->		
+                <p>Title :		
+                    <h:inputText id="title" label="title" size="32" value="#{exchangeController.title}"></h:inputText>
+                </p>
+                <!-- Type -->		
+                <p>Type:		
+                    <h:inputText id="type" label="type" size="32" value="#{exchangeController.type}"></h:inputText>
+                </p>
+                <!-- Price -->		
+                <p>Price:		
+                    <h:inputText id="price" label="price" size="32" value="#{exchangeController.price}"></h:inputText>
+                </p>
+                <p></p>     
+                <h:dataTable value="#{exchangeController.itemWrapperList}" var="itemEntry"
+                             styleClass="orders" headerClass="ordersHeader" 
+                             rowClasses="evenColumn,oddColumn">
+                    <h:outputStylesheet name="css/table.css"/>
+                    <h:column>            
+                        <f:facet name="header">ID</f:facet>            
+                            #{itemEntry.itemId}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Title</f:facet>
+                            #{itemEntry.title}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">ImageURL</f:facet>
+                            #{itemEntry.imageURL}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">AvailableUnits</f:facet>
+                            #{itemEntry.availableUnits}
+                    </h:column>
+                     <h:column>
+                        <f:facet name="header">TotalNumberInCirculation</f:facet>
+                            #{itemEntry.totalNumberInCirculation}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Price</f:facet>
+                            #{itemEntry.price}
+                    </h:column>
+                     <h:column>
+                        <f:facet name="header">Type</f:facet>
+                            #{itemEntry.type}
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Action</f:facet>
+
+                        <h:commandLink value="Add to Cart" action="#{exchangeController.addToChart(itemEntry)}" />
+                    </h:column>
+                </h:dataTable>
+                
+                <!-- 加入到购物车 -->		
+                <h:commandButton styleClass="button" value="View Cart" action="#{exchangeController.viewCart()}"/>
+                <h:dataTable value="#{exchangeController.chartList}" var="chartItem"
+                             styleClass="orders" headerClass="ordersHeader" 
+                             rowClasses="evenColumn,oddColumn">
+                    <h:outputStylesheet name="css/table.css"/>
+                    <h:column>            
+                        <f:facet name="header">ID</f:facet>            
+                            #{chartItem.itemId}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Title</f:facet>
+                            #{chartItem.title}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">ImageURL</f:facet>
+                            #{chartItem.imageURL}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">AvailableUnits</f:facet>
+                            #{chartItem.availableUnits}
+                    </h:column>
+                     <h:column>
+                        <f:facet name="header">TotalNumberInCirculation</f:facet>
+                            #{chartItem.totalNumberInCirculation}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Price</f:facet>
+                            #{chartItem.price}
+                    </h:column>
+                     <h:column>
+                        <f:facet name="header">Type</f:facet>
+                            #{chartItem.type}
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">Action</f:facet>
+
+                        <h:commandLink value="Purchase" action="#{itemController.viewDetail(itemEntry)}" />
+                    </h:column>
+                </h:dataTable>
+               
+                <p></p>
+                <h:commandButton styleClass="button" value="ViewMyExchanges" action="#{exchangeController.displayAllExchangesByUserId()}"/>   
+                <h:dataTable value="#{exchangeController.exchangeList}" var="exchangeEntry"
+                             styleClass="orders" headerClass="ordersHeader" 
+                             rowClasses="evenColumn,oddColumn">
+                    <h:outputStylesheet name="css/table.css"/>
+                    <h:column>            
+                        <f:facet name="header">Exchange ID</f:facet>            
+                            #{exchangeEntry.exchangeId}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Exchange Time</f:facet>
+                            #{exchangeEntry.exchangeTime}
+                    </h:column>
+                    <!--            <h:column>
+                                   <f:facet name="header">First Name</f:facet>
+                    #{exchangeEntry}
+                 </h:column>
+                 <h:column>
+                    <f:facet name="header">Phone Number</f:facet>
+                    #{userEntry.phoneNumber}
+                 </h:column>
+                 <h:column>
+                    <f:facet name="header">Email</f:facet>
+                    #{userEntry.email}
+                 </h:column>-->
+                </h:dataTable>
+            </h:form>
+        </article>		
+
+        <!-- Start Footer -->		
+        <footer>		
+            <p>This project created by Pan Pingping</p>
+        </footer>		
+        <!-- End Footer	-->		
+    </h:body>
+
+
 </html>

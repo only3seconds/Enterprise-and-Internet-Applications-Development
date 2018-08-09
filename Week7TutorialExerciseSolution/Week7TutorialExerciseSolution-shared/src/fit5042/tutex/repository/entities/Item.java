@@ -13,7 +13,7 @@ import javax.persistence.NamedQuery;
 
 /**
  *
- * @author Eddie
+ * @author thinking
  */
 @Entity
 @NamedQueries({

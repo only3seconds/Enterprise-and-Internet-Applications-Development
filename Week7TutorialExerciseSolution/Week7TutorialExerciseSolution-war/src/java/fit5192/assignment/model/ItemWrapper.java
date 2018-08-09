@@ -22,6 +22,16 @@ public class ItemWrapper {
         
     }
     
+    public ItemWrapper(ItemWrapper i) {
+        this.itemId = i.itemId;
+        this.title= i.title;
+        this.imageURL = i.imageURL;
+        this.availableUnits = i.availableUnits;
+        this.totalNumberInCirculation = i.totalNumberInCirculation;
+        this.price = i.price;
+        this.type = i.type;
+        
+    }
     public ItemWrapper(int itemId, String title, String type, int availableUnits, double price) {
         this.itemId = itemId;
         this.title = title;

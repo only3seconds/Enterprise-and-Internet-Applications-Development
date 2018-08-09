@@ -6,12 +6,17 @@
 package fit5192.assignment.controller;
 
 import fit5042.tutex.repository.ExchangeOperation;
+import fit5042.tutex.repository.ItemRepository;
 import fit5042.tutex.repository.UserOperation;
 import fit5042.tutex.repository.entities.Exchange;
+import fit5042.tutex.repository.entities.Item;
 import fit5042.tutex.repository.entities.SysUser;
 import fit5192.assignment.model.ActiveUser;
+import fit5192.assignment.model.ItemWrapper;
 import fit5192.assignment.navigation.Navigation;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
@@ -32,10 +37,28 @@ public class ExchangeController implements Serializable {
     
     private List<Exchange> exchangeList;
     
+    
+    private String title;
+    private String type;
+    private double price;
+    
+    
+    private List<ItemWrapper> itemWrapperList;
+    private static List<ItemWrapper> chartList;
+    
     @EJB
     private ExchangeOperation exchangeOperation;
+//    @EJB
+//    private UserOperation userOperation;
+    
     @EJB
-    private UserOperation userOperation;
+    private ItemRepository itemRepository;
+    
+
+    public ExchangeController() {
+        itemWrapperList = new ArrayList<>();
+        chartList = new ArrayList<>();
+    }
     
     public String displayAllExchangesByUserId() {
         try {
@@ -52,20 +75,64 @@ public class ExchangeController implements Serializable {
         }
     }
     
-    public String addSubOrder() {
+       //Search
+    public String searchItem() {
+        itemWrapperList.clear();
+        List<Item> itemList = new ArrayList<>();
+        if(null != title && !title.isEmpty()) {
+            itemList = this.searchItemByTitle(title);
+        } else if(null != type && !type.isEmpty()) {
+            itemList = this.searchItemByType(type);
+        } else if(price > 0) {
+            itemList = this.searchItemByBudget(price);
+        } else {
+            System.out.println("Do nothing");
+        }
+        
+        for(Item i : itemList) {
+            ItemWrapper itemWrapper = new ItemWrapper(i.getItemId(), i.getTitle(), i.getImageURL(), i.getNumberInStore(), i.getTotalNumberInCirculation(), i.getPerPrice(), i.getLabels().toString());
+            itemWrapperList.add(itemWrapper);          
+        }
+        return Navigation.exchange.toString();
+        
+    }
+    
+    private List<Item> searchItemByBudget(double budget) {
         try {
-            //sysUser = 登录进去的activeUser
-            HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-            sysUser = (SysUser) session.getAttribute("activeUser");
-            exchangeList = exchangeOperation.getAllExchangesByUserId(sysUser.getUserId());
-            
-            return Navigation.exchange.toString();
-            
+            return itemRepository.searchItemByPrice(budget);
         } catch (Exception ex) {
             ex.printStackTrace();
-            return Navigation.exchange.toString();
+            return new ArrayList<>();
         }
     }
+
+    
+    private List<Item> searchItemByTitle(String title) {
+        try {
+            return Arrays.asList(itemRepository.searchItemByTitle(title));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+    private List<Item> searchItemByType(String type) {
+        try {
+            return itemRepository.searchItemByType(type);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ArrayList<>();
+        }
+        
+    }
+    
+    //Add to chart
+    public String addToChart(ItemWrapper i) {
+        //System.out.println("Hello");打印不出来，好奇怪
+        chartList.add(i);
+        System.out.println("size = " + chartList.size());
+        return Navigation.item.toString();
+    }
+    
 
     public int getExchangeId() {
         return exchangeId;
@@ -114,4 +181,55 @@ public class ExchangeController implements Serializable {
     public void setExchangeOperation(ExchangeOperation exchangeOperation) {
         this.exchangeOperation = exchangeOperation;
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public List<ItemWrapper> getItemWrapperList() {
+        return itemWrapperList;
+    }
+
+    public void setItemWrapperList(List<ItemWrapper> itemWrapperList) {
+        this.itemWrapperList = itemWrapperList;
+    }
+
+    public ItemRepository getItemRepository() {
+        return itemRepository;
+    }
+
+    public void setItemRepository(ItemRepository itemRepository) {
+        this.itemRepository = itemRepository;
+    }
+
+    public List<ItemWrapper> getChartList() {
+        return chartList;
+    }
+
+    public void setChartList(List<ItemWrapper> chartList) {
+        this.chartList = chartList;
+    }
+    
+    
+    
 }

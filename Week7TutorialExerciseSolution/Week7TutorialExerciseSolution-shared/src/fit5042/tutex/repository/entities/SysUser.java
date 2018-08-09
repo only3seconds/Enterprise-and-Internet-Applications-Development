@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author Eddie
+ * @author thinking
  */
 @Entity
 @Table(name = "SYS_USER")
