@@ -39,12 +39,23 @@ public class LoginController {
             System.out.println("userEmail: "+userEmail+"login success");
             
             // 创建session，将用户名和ActiveUser填进去
-                HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+            HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(true);
             session.setAttribute("userEmail", userEmail);
             session.setAttribute("activeUser", activeUser);
             
             // 跳转到 item.xhml页面
-            return Navigation.exchange.toString();
+            SysUser sysUser = userOperation.searchUserByEmail(userEmail);
+            if(null ==sysUser.getMembershipLevel()) {
+                System.out.println("null - thinking_fioa");
+            }
+            if(sysUser.getMembershipLevel().equalsIgnoreCase("Administrator")) {
+                return Navigation.administrator.toString();
+            } else if (sysUser.getMembershipLevel().equalsIgnoreCase("Trader")) {
+                return Navigation.trader.toString();
+            }
+            
+            return Navigation.item.toString();
+            
         } catch (Exception e) {
             e.printStackTrace();
             return Navigation.error.toString();

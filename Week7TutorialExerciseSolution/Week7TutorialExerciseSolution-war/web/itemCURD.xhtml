@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>		
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <h:outputStylesheet name="css/style.css"/>
+        <title>User - Home</title>	
+    </h:head>
+
+    <h:body>		
+
+        <header>		
+            <h1>Search View Update Delete Items</h1>	
+        </header>		
+
+        <!-- Start Article -->		
+        <article>		
+            <h2>Enter Item properties</h2>		
+            <hr	/>
+
+            <h:form>
+                <!-- Item ID -->		
+                <p>Item ID:		
+                    <h:inputText id="itemId" label="id" size="32" value="#{itemCURDController.itemId}"></h:inputText>
+                </p>
+
+                <!-- Title -->		
+                <p>Title :		
+                    <h:inputText id="title" label="title" size="32" value="#{itemCURDController.title}"></h:inputText>
+                </p>
+
+                <!-- ImageURL -->		
+                <p>ImageURL :		
+                    <h:inputText id="imageURL" label="imageURL" size="32" value="#{itemCURDController.imageURL}"></h:inputText>
+                </p>
+
+
+                <!--  Avaliable Units-->		
+                <p>Avaliable Units:	
+                    <h:inputText id="avaliableUnits" label="avaliableUnits" size="32" value="#{itemCURDController.avaliableUnits}"></h:inputText>
+                </p>
+
+                <!--  TotalNumberInCirculation-->		
+                <p>totalNumberInCirculation:	
+                    <h:inputText id="totalNumberInCirculation" label="totalNumberInCirculation:" size="32" value="#{itemCURDController.totalNumberInCirculation}"></h:inputText>
+                </p>
+
+                <!-- Price -->		
+                <p>Price:		
+                    <h:inputText id="price" label="price" size="32" value="#{itemCURDController.price}"></h:inputText>
+                </p>
+
+                <!-- Type -->		
+                <p>Type:		
+                    <h:inputText id="type" label="type" size="32" value="#{itemCURDController.type}"></h:inputText>
+                </p>
+
+
+
+
+
+                <h:commandButton styleClass="button" value="Add" action="#{itemCURDController.addItem()}"/>
+                <h:commandButton styleClass="button" value="Update" action="#{itemCURDController.updateItem()}"/>
+                <h:commandButton styleClass="button" value="View" action="#{itemCURDController.displayAllItems()}"/>    
+                <h:dataTable value="#{itemCURDController.itemWrapperList}" var="itemEntry"
+                             styleClass="orders" headerClass="ordersHeader" 
+                             rowClasses="evenColumn,oddColumn">
+                    <h:outputStylesheet name="css/table.css"/>
+                    <h:column>            
+                        <f:facet name="header">Item ID</f:facet>            
+                            #{itemEntry.itemId}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Title</f:facet>
+                            #{itemEntry.title}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">ImageURL</f:facet>
+                            #{itemEntry.imageURL}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">NumberInStore</f:facet>
+                            #{itemEntry.availableUnits}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">TotalNumberInCirculation</f:facet>
+                            #{itemEntry.totalNumberInCirculation}
+                    </h:column>
+                      <h:column>
+                        <f:facet name="header">Per Price</f:facet>
+                            #{itemEntry.price}
+                    </h:column>
+                      <h:column>
+                        <f:facet name="header">Labels</f:facet>
+                            #{itemEntry.type}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Action</f:facet>
+
+                        <h:commandLink value="Delete" action="#{itemCURDController.deleteItem(itemEntry.itemId)}" />
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </article>		
+
+        <!-- Start Footer -->		
+        <footer>		
+            <p>This project created by Pan Pingping</p>
+        </footer>		
+        <!-- End Footer	-->		
+    </h:body>
+
+
+</html>

@@ -12,19 +12,16 @@
     <h:body>		
 
         <header>		
-            <h1>Item Main Page</h1>		
+            <h1>Search Item</h1>		
         </header>		
 
         <!-- Start	Article	-->		
-        <article>		
-            <h2>Welcome <b style="color: red; font-size: 50px">#{session.getAttribute("userEmail")}</b>Enter your Item properties</h2>		
+        <article>	
+            <h2>Welcome <b style="color: red; font-size: 50px">#{session.getAttribute("userEmail")}</b>Enter your Item properties</h2>	
             <hr	/>
 
             <h:form>
-                <!-- Item ID -->		
-                <p>Item ID:		
-                    <h:inputText id="itemID" label="id" size="32" disabled="true" value="#{itemController.title}"></h:inputText>
-                </p>
+                
 
                 <!-- Title -->		
                 <p>Title :		
@@ -36,10 +33,7 @@
                     <h:inputText id="type" label="type" size="32" value="#{itemController.type}"></h:inputText>
                 </p>
 
-                <!--  Avaliable Units-->		
-                <p>Avaliable Units:	
-                    <h:inputText id="avaliableUnits" label="avaliableUnits" size="32" disabled="true" value="#{itemController.type}"></h:inputText>
-                </p>
+               
 
                 <!-- Price -->		
                 <p>Price:		

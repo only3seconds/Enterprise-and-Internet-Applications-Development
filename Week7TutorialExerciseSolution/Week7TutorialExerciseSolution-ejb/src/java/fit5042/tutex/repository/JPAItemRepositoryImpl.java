@@ -66,5 +66,23 @@ public class JPAItemRepositoryImpl implements ItemRepository{
         System.out.println("label = " + item.getLabels().toString());//没找到label
         return item;
     }
+
+    @Override
+    public void addItem(Item item) throws Exception {
+        entityManager.persist(item);
+    }
+
+    @Override
+    public void updateItem(Item item) throws Exception {
+        entityManager.merge(item);
+    }
+
+    @Override
+    public void deleteItem(int userId) throws Exception {
+        Item item = this.searchItemById(userId);
+        if(item != null) {
+            entityManager.remove(item);
+        }  
+    }
     
 }

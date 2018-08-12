@@ -19,7 +19,7 @@ public class MD5 {
     }
     
     public static void main(String [] args) {
-        String password = "2B";
+        String password = "123456";
         System.out.println(getMD5ofStr(password));
     }
             

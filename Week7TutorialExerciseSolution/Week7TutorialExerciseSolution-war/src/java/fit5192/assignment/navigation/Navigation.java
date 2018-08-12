@@ -15,5 +15,8 @@ public enum Navigation {
     login,
     user,
     error,
-    exchange
+    exchange,
+    itemCURD,
+    administrator,
+    trader
 }

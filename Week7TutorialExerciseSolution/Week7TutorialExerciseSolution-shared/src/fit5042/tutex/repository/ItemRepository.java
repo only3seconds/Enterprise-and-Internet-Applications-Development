@@ -20,5 +20,11 @@ public interface ItemRepository {
 
     public List<Item> getAllItems() throws Exception;
     
+    public void addItem(Item item) throws Exception;
+    
+    public void updateItem(Item item) throws Exception;
+    
+    public void deleteItem(int userId) throws Exception;
+    
     
 }

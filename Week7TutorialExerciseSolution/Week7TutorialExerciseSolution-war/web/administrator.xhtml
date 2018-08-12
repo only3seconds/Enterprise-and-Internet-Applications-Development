@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>		
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+<h:head>
+    <h:outputStylesheet name="css/style.css"/>
+<title>User - Home</title>	
+</h:head>
+    
+<h:body>		
+	
+<header>		
+    <h1>Welcome Administrator #{session.getAttribute("userEmail")} </h1>	
+</header>		
+		
+<!-- Start Article -->		
+<article>		
+    
+    <h:form>	
+        <h:commandButton styleClass="button" value="Item Ooeration" action="itemCURD"/>		
+        <h:commandButton styleClass="button" value="User Operation" action="user"/>
+        <h:commandButton styleClass="button" value="Trade" action="exchange"/>
+    </h:form>
+</article>		
+
+<!-- Start Footer -->		
+<footer>		
+    <p>This project created by Pan Pingping</p>
+</footer>		
+<!-- End Footer	-->		
+</h:body>
+    
+    
+</html>
